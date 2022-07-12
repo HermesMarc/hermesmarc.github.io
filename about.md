@@ -1,12 +1,16 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: About Me
+permalink: /aboutme/
 feature-img: "assets/img/sample_feature_img_2.png"
 ---
 
-Type Theme is a free and open-source theme for [Jekyll](http://jekyllrb.com/), licensed under the MIT License.
+Hi! I'm a <s>physicist</s> <s>mathematician</s> computer scientist (?) doing a PhD at the Radboud University in Nijmegen in the Netherlands. 
 
-Head over to the [theme's documentation](https://rohanchandra.github.io/project/type/) for much more information about Type Theme or to install this theme on your own Jekyll site.
 
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
+## Publications:
+
+1. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://www.ps.uni-saarland.de/Publications/documents/HermesKirst_2022_An-Analysis.pdf) *Marc Hermes, Dominik Kirst, FSCD 2022, Haifa, Israel, 2022*
+2. [Modeling Peano Arithmetic in Constructive Type Theory (MA Thesis)](https://raw.githubusercontent.com/HermesMarc/Documents/main/thesis.pdf), *Marc Hermes, 2021*
+3. [Synthetic Undecidability and Incompleteness of First-Order Axiom Systems in Coq (Extended Version)](https://www.ps.uni-saarland.de/extras/axiomatisations-ext/journal.pdf), *Dominik Kirst, Marc Hermes, submitted for review* 
+4. [Synthetic Undecidability and Incompleteness of First-Order Axiom Systems in Coq](https://drops.dagstuhl.de/opus/volltexte/2021/13918/pdf/LIPIcs-ITP-2021-23.pdf), *Dominik Kirst, Marc Hermes, ITP 2021, Rome, Italy, 2021*
