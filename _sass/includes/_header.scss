@@ -11,19 +11,19 @@
   }
 
   .avatar {
-    height: 2em;
-    width: 2em;
+    height: 4em;
+    width: 4em;
     float: left;
     margin-top: -3px;
-    border-radius: 0.2em;
+    border-radius: 2em;
     margin-right: 1em;
   }
 
   .site-title {
     float: left;
     font-weight: bold;
-    font-size: 1em;
-    line-height: 1.5;
+    font-size: 1.5em;
+    line-height: 2.3;
   }
 
   .site-nav {
@@ -57,7 +57,7 @@
     /* --- Search form --- */
     form {
         border: 0;
-        border-bottom: 2px solid $search-color;
+        border-bottom: 2px solid $brand-color;
         outline: 0;
 
         *:focus {
@@ -70,6 +70,7 @@
                 border: 0;
                 outline: 0;
                 color: $search-color;
+                background-color: #393939;
             }
 
             &::-moz-placeholder {
