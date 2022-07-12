@@ -1,11 +1,11 @@
 # SITE CONFIGURATION
-baseurl: ""
+baseurl: "/melon-please"
 url: "https://hermesmarc.github.io/"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: MELoN, please.
+  title: melon, please.
   avatar: assets/img/avatar.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
