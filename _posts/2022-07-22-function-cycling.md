@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to make finite Functions cycle together  🚴🏻‍♀️🚴🏿🚴‍♂️"
+title: "How to make finite Functions cycle together?  🚴🏻‍♀️🚴🏿🚴‍♂️"
 tags: [Puzzle]
 katex: True
 ---
@@ -19,7 +19,7 @@ The result we get is quite repetitive, just continues on in the same fashion, ne
 It gets a bit more interesting if we let $$X$$ have a few more elements.
 Take $$X = \{1, 2, 3, 4\}$$ for example, and the function defined by
 $$
-f(1) := 3, ~f(2) := 2, ~f(3) := 4, ~f(4) := 1.
+  f(1) := 3, ~f(2) := 2, ~f(3) := 4, ~f(4) := 1.
 $$
 If you play around with some starting values (there aren't that many) you will quickly see that repetition strikes again.
 Similarly to the very easy case of the one element set, here too our function seems to always end up in a cycle, only that they can contain more elements.
@@ -41,4 +41,5 @@ The latter statement tells us that at least after $$k$$ steps, all functions wil
 To be unambiguous with the puzzles, here are possible ways to formulate them in a fully formal way:
 
 > 1) $$X$$ finite $$\implies$$ $$\forall (f : X \to X) \, \exists a \in X. ~\exists \, c. ~f^{c}(a) = a$$.
+> 
 > 2) $$X$$ finite $$\implies$$ $$\exists \, k,c. ~~ k < c ~\land~ \forall (f : X \to X) \, \forall x. ~  f^{c+k}(x) = f^k (x)$$.
