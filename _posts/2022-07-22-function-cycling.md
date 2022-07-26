@@ -11,16 +11,19 @@ Given any set $$X$$, element $$x \in X$$ and function $$f : X \to X$$ we can rep
 
 This sequence is not always infinitely interesting. 
 In the extreme case, where $$X$$ only has one element $$x_0$$, the only possible function there is $$x_0 \mapsto x_0$$, giving us
+
+$$ 
+f^1 (x_0), f^2 (x_0), f^3 (x_0), \dots \, = \,x_0, x_0, x_0, \dots
 $$
- f^1 (x_0), f^2 (x_0), f^3 (x_0), \dots \,
- = \,x_0, x_0, x_0, \dots
-$$
+
 The result we get is quite repetitive, just continues on in the same fashion, never changes or adds something new, is therefore not very interesting, and is kind of just dragging along, just like this sentence.
 It gets a bit more interesting if we let $$X$$ have a few more elements.
 Take $$X = \{1, 2, 3, 4\}$$ for example, and the function defined by
+
 $$
   f(1) := 3, ~f(2) := 2, ~f(3) := 4, ~f(4) := 1.
 $$
+
 If you play around with some starting values (there aren't that many) you will quickly see that repetition strikes again.
 Similarly to the very easy case of the one element set, here too our function seems to always end up in a cycle, only that they can contain more elements.
 A more general principle seems to be at play, which brings us to our first puzzle:
