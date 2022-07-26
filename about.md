@@ -2,7 +2,7 @@
 layout: page
 title: About Me
 permalink: /aboutme/
-feature-img: "assets/img/Trees_union.png"
+feature-img: "assets/img/avatar.png"
 ---
 
 Hi! I'm a <s>physicist</s> <s>mathematician</s> computer scientist (?) doing a PhD at the Radboud University in Nijmegen (Netherlands). 
