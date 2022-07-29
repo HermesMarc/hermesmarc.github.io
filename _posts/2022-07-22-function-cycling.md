@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to make finite Functions cycle together?  🚴🏻‍♀️🚴🏿🚴‍♂️"
+title: "🚴🏻‍♀️ Do finite Functions cycle 🚴🏿 together? 🚴‍♂️"
 tags: [Puzzle]
 katex: True
 ---
@@ -35,9 +35,9 @@ By *cycling back to $$a$$* we mean that there is some number of steps $$c \in \m
 
 So while puzzle 1 claims that functions on finite sets enjoy cycling on their own, what about cycling together?
 
-> ***Puzzle 2:*** Let $$X$$ be a finite set. Show that there is a number $$k$$ such that no matter the starting value $$x$$, all functions $$f : X \to X$$ will cycle around $$f^k(x)$$.
+> ***Puzzle 2:*** Let $$X$$ be a finite set. Show that there is a number $$k < c$$ such that no matter the starting value $$x$$, all functions $$f : X \to X$$ will always cycle back to $$f^k(x)$$ after $$c$$ additional steps. 
 
-The latter statement tells us that after $$k$$ steps, all functions will go cycling; it's therefore a truly popular sport.
+The latter statement therefore telling us that after some time all functions will indeed cycle together, all of them returning to some personal anchor point after the same amount of time.
 
 ----
 

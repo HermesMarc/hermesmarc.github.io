@@ -3,9 +3,10 @@ layout: page
 title: About Me
 permalink: /aboutme/
 feature-img: "assets/img/avatar.png"
+katex: True
 ---
 
-Hi! I'm a <s>physicist</s> <s>mathematician</s> computer scientist (?) doing a PhD at the Radboud University in Nijmegen (Netherlands). 
+Hi! I'm a physicist $$\succ_\beta$$ mathematician $$\succ_\beta$$ computer scientist doing a PhD at the Radboud University in Nijmegen (Netherlands). 
 
 
 ## Publications:
