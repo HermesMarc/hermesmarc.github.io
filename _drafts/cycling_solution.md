@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to make finite Functions cycle together  🚴🏻‍♀️🚴🏿🚴‍♂️ (Solution)"
+title: "How to make finite Functions cycle together!  🚴🏻‍♀️🚴🏿🚴‍♂️"
 tags: [Puzzle, Solution]
 katex: True
 ---
