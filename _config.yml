@@ -6,7 +6,7 @@ url: "https://hermesmarc.github.io/"
 theme_settings:
   # Meta
   title: melon, please.
-  avatar: assets/img/melon.png
+  avatar: assets/img/avatar.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
   description: "A website about constructive mathematics (mostly)" # used by search engines
