@@ -5,7 +5,7 @@ url: "https://hermesmarc.github.io/"
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: melon, please.
+  title: potentially interesting
   avatar: assets/img/avatar.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
