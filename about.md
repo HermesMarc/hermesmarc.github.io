@@ -19,4 +19,4 @@ Hi! I'm a physicist $$\succ_\beta$$ mathematician $$\succ_\beta$$ computer scien
 
 ## Talks
 
-1. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://raw.githubusercontent.com/HermesMarc/Documents/main/Tennenbaum-talk.pdf), *FSCD 2022, Haifa, Israel, August 3 2022*
+1. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://raw.githubusercontent.com/HermesMarc/Documents/main/Tennenbaum-talk.pdf), *FSCD 2022, Haifa, Israel, 3-Aug-2022*
