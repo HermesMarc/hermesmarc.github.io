@@ -1,12 +1,15 @@
+Try to think of all numbers, neatly lined up
+$$
+0,1,2,3,4,5 \dots
+$$
+(Construct to the reader the image of a non-standard PA model)
 
-I have just recently returned from my trip to Haifa, where I attended the FSCD conference which was part of FLoC this year.
-Having presented our paper on Tennenbaum's theorem there, my memories are still fresh, and I want to use the opportunity to sit down and write a post on the theorem, with the goal to present one of its proof which uses one of mathematics finest proof techniques: the diagonal argument.
 
-To get started, let's first have a look at a familiar world: the world of natural numbers.
+
 
 ## Peano Arithmetic
 
-The most influential and time-proven formulation of what the natural numbers are, is to this day to one given by Peano.
+The most influential and time-proven formulation of what the natural numbers are, is to this day the one given by Italian mathematician Giuseppe Peano.
 Disregarding induction, these are:
 
 > Axioms
@@ -22,16 +25,16 @@ We are actually so accustomed to the fact that $\mathbb{N}$ satisfies these axio
 
 Is it possible to represent a whole finite set of numbers by one single number? 
 The answer is: Yes!
-And here is one way of how we can achieve this, by making use of prime numbers.
-If we are given the finite set $S = \{ 3,8,22\}$ we get a single number by taking the following product of primes $c_S := \pi_3 \cdot \pi_8 \cdot \pi_{22}$, where $\pi_n$ stands for the $n$-th prime number.
-This gives us the relationship
+And here is one to achieve this, which makes use of prime numbers.
+If we are given the finite set $S = \{ 3,8,22\}$ we form the product of primes $c_S := \pi_3 \cdot \pi_8 \cdot \pi_{22}$, where $\pi_n$ stands for the $n$-th prime number.
+By the special properties that prime numbers have when divisibility is concerned, this gives us the relationship
 $$
  n \in S \iff \pi_n \text{ divides } c_S
 $$
-So by checking which primes divide $c_S$, we can reconstruct exactly which elements the finite set $S$ has. 
-We therefore also say that $c_S$ is a *code-number* or simply *code* for the set $S$.
-Disappointingly we can only use this to code finite sets, since an infinite set would give us an infinite product, which would not yield a well defined natural number.
-We will however come back to this point shortly.
+So by checking which primes divide $c_S$, we can easily reconstruct $S$. 
+We call $c_S$ a *code-number* or simply *code* for the set $S$.
+Disappointingly we can only use this to code finite sets, since an infinite set would require an infinite product of numbers in $\mathbb{N}$.
+
 
 ----
 
@@ -52,15 +55,29 @@ $$
 \end{aligned}
 $$
 inside of $M$. We therefore see: every model of PA has a copy of the natural numbers sitting inside of it! 
-We call the above elements the *standard numbers* of the model.
+We call the above elements the *standard numbers* of the model. 
 
 
 ## Non-standard Models
-The situation gets interesting once a model $M$ has more than just the standard numbers, i.e. once it has an element $e : M$ satisfying
+Models of Peano Arithmetic get interesting once they have more than just the standard numbers.
+Yes you heard that right! We can have a model $M$, which has an element $e : M$ satisfying
 $$
   \forall n : \mathbb{N}. ~~ e \neq \overline n
 $$
 We call such an element *non-standard* and likewise say that a model is non-standard if it has such an element.
+A non-standard element $e$ is not $0$, so it has a predecessor $e-1$, which is also non-standard (if it were standard, $e$ would be too). 
+It then becomes clear that there really is an infintie line of predecessors preceding $e$, and likewise a line of successors:
+$$
+  \dots, e-3, e-2, e-1, \,e \, , e+1 , e+2, e+3, \dots
+$$
+All of these are sitting beyond the reach of the standard numbers:
+$$
+  0, 1, 2, 3, 4, \dots ~~~~~<~~~~~\dots,\, e-3 \,,\, e-2 \,,\, e-1 \,, \,e \, ,\, e+1 \, , \, e+2 \, , \, e+3 \, , \dots
+$$
+We already observed in the above that every PA model contains a copy of $\mathbb{N}$, but we have now made the observation that a non-standard model also has at least one copy of $\mathbb{Z}$ sitting inside of it. 
+$$
+  \underbrace{0, 1, 2, 3, 4, \dots}_{\text{copy of } \mathbb{N}} ~~~~~<~~~~~ \underbrace{\dots,\, e-3 \,,\, e-2 \,,\, e-1 \,, \,e \, ,\, e+1 \, , \, e+2 \, , \, e+3 \, , \dots}_{\text{copy of } \mathbb{Z}}
+$$
 
 
 A countable model is one where we have a surjective function $g : \mathbb{N} \to M$. So if we look at the infinite list
@@ -72,28 +89,28 @@ Then every element of $M$ will appear in the list at some point.
 
 ## The Diagonal Argument
 
-Let's now see why we cannot have a model $M$ which is
+Let's now see what happens if we have a model $M$ which is
 
 - countable,
-- has computable divisibility,
-- and is non-standard.
+- non-standard,
+- has computable divisibility.
 
-For the purpose of getting to a contradiction, assume that the above were true.
-First of all, note that we then have a surjection $g : \mathbb{N} \to M$ which allows us to consider the following subset of numbers:
+Since it is countable, we get a surjection $g : \mathbb{N} \to M$, allowing us to consider the following subset of numbers:
 $$
   D := \{ \, n \mid \pi_n \text{ does not divide } g(n) \, \}
 $$
-Since divisibility is computable, this set is computable.
-We learned earlier that a non-standard model comes with a non-standard element $e \in M$, and this in turn allow us to encode computable sets like $D$ as a single element in $M$, by multiplying prime numbers: 
+We can always compute whether for some natural number $x$ we have $x \in D$, since divisibility is computable in the considered model.
+By assumption, the model also comes with a non-standard element $e \in M$, which allow us to encode computable sets like $D$ by a single element in $M$.
+Just as we did earlier, we do this by multiplying prime numbers: 
 $$
   c := \prod_{k < e, \, k \in D} \pi_k
 $$
-This element must also be hit by $g$ at some point, so there is $m \in \mathbb{N}$ such that $c = g(m)$.
-But now an intriguing question presents itself: is $m \in D$ or not? Let's consider both options:
+Now comes the critical part: This element must also be hit by $g$ at some point, so there is $m \in \mathbb{N}$ such that $c = g(m)$.
+With this in hand, an intriguing question presents itself: is $m \in D$ or not? Let's consider both options:
 
 - If $m \in D$ then by the definition of $D$ this means that $\pi_m$ does not divide $g(m)$. 
 But by the definition of $c$ we know that $\pi_m$ is part of the above product, and therefore $\pi_m$ does divide $c = g(m)$. Contradiction!
-- If $m \not\in D$ we can work out a contradiction in the same fashion.
+- If $m \not\in D$ we can reason in the same way and will again arrive at a contradiction.
 
 So either way, we end up with a contradiction!
 We therefore have to conclude that a model with all of the listed properties simply does not exist.

@@ -6,7 +6,7 @@ feature-img: "assets/img/avatar.png"
 katex: True
 ---
 
-Hi! I'm a physicist $$\succ_\beta$$ mathematician $$\succ_\beta$$ computer scientist doing a PhD at the Radboud University in Nijmegen (Netherlands). 
+Hi! I'm a physicist $$\succ_\beta$$ mathematician $$\succ_\beta$$ computer scientist doing a PhD at the Radboud University in the wonderful city of Nijmegen.
 
 
 ## Research and Publications:
