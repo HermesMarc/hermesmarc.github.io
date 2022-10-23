@@ -2,7 +2,7 @@
 layout: page
 title: About Me
 permalink: /aboutme/
-feature-img: "assets/img/avatar.png"
+feature-img: "assets/img/avatar.jpeg"
 katex: True
 ---
 
