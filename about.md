@@ -18,8 +18,9 @@ Hi! I'm a physicist $$\succ_\beta$$ mathematician $$\succ_\beta$$ computer scien
 5. Quantum memory for photons (BA Thesis), *Marc Hermes, Saarland University, 2017*
 
 
-
+## Events
 <!-- Once I have more of these events, change the bullets to a numbering. Makes it look more impressive -->
 
 - Participant: Autumn School on Proof Theory 2022, *Utrecht, Netherlands, Nov-2022*
 - Talk: [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://raw.githubusercontent.com/HermesMarc/Documents/main/Tennenbaum-talk.pdf), *FSCD 2022, Haifa, Israel, 3-Aug-2022*
+- Participant: Iris Workshop, *Radboud University, Nijmegen, Netherlands, May-2022*
