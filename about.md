@@ -28,10 +28,10 @@ In his free time, he enjoys scaling the heights of the local climbing gym, watch
 <!-- - Participant: Iris Workshop 2023, *Universität des Saarlandes, Saarbrücken, Germany May-2023* -->
 
 <!-- Exact Dates: Jan-17 to Jan-21 -->
-<!-- - Student Volunteer: *POPL 2023, Boston, United States, Jan-2023* -->
+- Student Volunteer: *POPL 2023, Boston, United States, Jan-2023*
 
 <!-- Exact Dates: Jan-17 -->
-<!-- - Participant: *PLMW 2023, Boston, United States, 17-Jan-2023* -->
+- Participant: *PLMW 2023, Boston, United States, 17-Jan-2023*
 
 <!-- Exact Dates: Nov-7 to Nov-11 -->
 - Participant: Autumn School on Proof Theory 2022, *Utrecht, Netherlands, Nov-2022*
