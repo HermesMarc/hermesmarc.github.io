@@ -6,14 +6,15 @@ feature-img: "assets/img/avatar.jpeg"
 katex: True
 ---
 
-Marc is a PhD student in at the Institute of Computer Science at Nijmegen, where he is currently researching the use of computer-verified proofs on concurrent programs.
-He is originally from Luxembourg and earned a Bachelor's degree in Physics in Germany. During his Master's program, Marc became captivated by the use of computers to verify mathematical proofs, leading him to switch fields to Mathematics and explore this further in his Master Thesis.
+I am a PhD student at the Institute of Computer Science at Nijmegen, where I'm currently researching the use of computer-verified proofs on concurrent programs.
+Originally I come from Luxembourg and earned my Bachelor's degree in Physics in Germany. During my Master's program, I became very captivated by the use of computers to verify mathematical proofs, which lead me to switch fields to Mathematics and explore this further in my Master Thesis.
 
-In his free time, he enjoys scaling the heights of the local climbing gym, watching movies/shows or cooking with friends, listening to music and reading.
+In my free time, I enjoy scaling the heights of the local climbing gym, watching movies/shows or cooking with friends, listening to music and reading.
 
 
 ## Research and Publications:
 
+6. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory (Journal Version)](https://arxiv.org/abs/2302.14699) *Under Review*
 5. [Synthetic Undecidability and Incompleteness of First-Order Axiom Systems in Coq (Extended Version)](https://link.springer.com/article/10.1007/s10817-022-09647-x), *Dominik Kirst, Marc Hermes, Journal of Automated Reasoning volume 67, Article number: 13, 2023 March 12*
 4. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://drops.dagstuhl.de/opus/volltexte/2022/16290/pdf/LIPIcs-FSCD-2022-9.pdf), *Marc Hermes, Dominik Kirst, FSCD 2022, Haifa, Israel, 2022 (Recipient of FSCD 2022 Award for Best Paper by Junior Researchers)*
 3. [Modeling Peano Arithmetic in Constructive Type Theory (MA Thesis)](https://raw.githubusercontent.com/HermesMarc/Documents/main/thesis.pdf), *Marc Hermes, Saarland University, 2021*
