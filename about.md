@@ -6,7 +6,7 @@ feature-img: "assets/img/avatar.jpeg"
 katex: True
 ---
 
-I am a PhD student at the Institute of Computer Science at Nijmegen, where I'm currently researching the use of computer-verified proofs on concurrent programs.
+I am a PhD student at the Institute of Computer Science at Nijmegen, where I'm currently researching how algorithms that manipulate graph-based data-structures can be computer-verified in a modular way.
 Originally I come from Luxembourg and earned my Bachelor's degree in Physics in Germany. During my Master's program, I became very captivated by the use of computers to verify mathematical proofs, which lead me to switch fields to Mathematics and explore this further in my Master Thesis.
 
 In my free time, I enjoy scaling the heights of the local climbing gym, watching movies/shows or cooking with friends, listening to music and reading.
