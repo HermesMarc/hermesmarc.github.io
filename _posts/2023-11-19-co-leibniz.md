@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Co-Leibniz Identity for Decidability"
-tags: [logic] [Heyting] [math]
-katex: true
+tags: [logic]
+katex: True
 ---
 
 [Heyting algebras](https://ncatlab.org/nlab/show/Heyting+algebra) are structures that can be used to give a semantics to intuitionistic propositional logic, and as it turns out, they can easily be dualised, yielding the aptly named [*co-Heyting algebras*](https://ncatlab.org/nlab/show/co-Heyting+algebra). These come equipped with three binary operations $$(\land, \lor, \leftharpoondown)$$,  where $$\leftharpoondown$$ is the dual of implication $$\to$$ and usually called *subtraction* or *exclusion*.
