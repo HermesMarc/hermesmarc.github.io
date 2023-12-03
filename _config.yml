@@ -13,7 +13,7 @@ theme_settings:
 
   # Header and footer text
   header_text: >
-     <p>Welcome to my personal site, where I write ¬¬interesting posts about constructive mathematics, logics, computation and the occasional puzzle.</p>
+     <p>Welcome to my personal site, where I write posts about constructive mathematics, logics, computation and the occasional puzzle.</p>
 
   header_text_feature_image:
   footer_text: >
