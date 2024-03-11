@@ -14,7 +14,7 @@ In my free time, I enjoy scaling the heights of the local climbing gym, watching
 
 ## Research and Publications:
 
-6. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory (Journal Version)](https://arxiv.org/abs/2302.14699) *To appear in Logical Methods in Computer Science Volume 20*
+6. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory (Journal Version)](https://lmcs.episciences.org/13204) *Marc Hermes, Dominik Kirst, Logical Methods in Computer Science, Volume 20 Issue 1*
 5. [Synthetic Undecidability and Incompleteness of First-Order Axiom Systems in Coq (Extended Version)](https://link.springer.com/article/10.1007/s10817-022-09647-x), *Dominik Kirst, Marc Hermes, Journal of Automated Reasoning volume 67, Article number: 13, 2023 March 12*
 4. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://drops.dagstuhl.de/opus/volltexte/2022/16290/pdf/LIPIcs-FSCD-2022-9.pdf), **(🏆 Award for Best Paper by Junior Researchers)** *Marc Hermes, Dominik Kirst, FSCD 2022, Haifa, Israel,*
 3. [Modeling Peano Arithmetic in Constructive Type Theory (MA Thesis)](https://raw.githubusercontent.com/HermesMarc/Documents/main/thesis.pdf), *Marc Hermes, Saarland University, 2021*
