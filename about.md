@@ -6,10 +6,17 @@ feature-img: "assets/img/background.png"
 katex: True
 ---
 
-I am a PhD student at the Institute of Computer Science at Nijmegen, where I'm currently researching how algorithms that manipulate graph-based data-structures can be computer-verified in a modular way.
+
 Originally I come from Luxembourg and earned my Bachelor's degree in Physics in Germany. During my Master's program, I became very captivated by the use of computers to verify mathematical proofs, which lead me to switch fields to Mathematics and explore this further in my Master Thesis.
 
-In my free time, I enjoy scaling the heights of the local climbing gym, watching movies/shows or cooking with friends, listening to music and reading.
+While a mathematician by training, I'm arguably more of a logician by practice. As you can see below, I have done some work on the intersection of computer-verified mathematics, first-order arithmetic and computability theory, in particular making use of an approach coined _synthetic computability_.
+
+I am currently looking for a PhD position in the area of mathematical logic, interested in continuing research on mechanized mathematics, topics like paraconsistent logics, the boundaries of the incompleteness theorems, or combinations of these themes. 
+
+If you are interested or have any pointers for me in this regard, please feel free to contact me!
+
+
+%%In my free time, I enjoy scaling the heights of the local climbing gym, watching movies/shows or cooking with friends, listening to music and reading.%%
 
 
 ## Research and Publications:
