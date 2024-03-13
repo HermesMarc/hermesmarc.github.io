@@ -15,8 +15,7 @@ I am currently looking for a PhD position in the area of mathematical logic, int
 
 If you are interested or have any pointers for me in this regard, please feel free to contact me!
 
-
-%%In my free time, I enjoy scaling the heights of the local climbing gym, watching movies/shows or cooking with friends, listening to music and reading.%%
+<!-- In my free time, I enjoy scaling the heights of the local climbing gym, watching movies/shows or cooking with friends, listening to music and reading. -->
 
 
 ## Research and Publications:
