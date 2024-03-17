@@ -22,14 +22,14 @@ If you are interested or have any pointers for me in this regard, please feel fr
 
 6. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory (Journal Version)](https://lmcs.episciences.org/13204) *Marc Hermes, Dominik Kirst, Logical Methods in Computer Science, Volume 20 Issue 1*
 5. [Synthetic Undecidability and Incompleteness of First-Order Axiom Systems in Coq (Extended Version)](https://link.springer.com/article/10.1007/s10817-022-09647-x), *Dominik Kirst, Marc Hermes, Journal of Automated Reasoning volume 67, Article number: 13, 2023 March 12*
-4. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://drops.dagstuhl.de/opus/volltexte/2022/16290/pdf/LIPIcs-FSCD-2022-9.pdf), **(🏆 [Award for Best Paper by Junior Researchers](https://fscd-conference.org/editions/best-paper-awards/))** *Marc Hermes, Dominik Kirst, FSCD 2022, Haifa, Israel,*
+4. [An Analysis of Tennenbaum's Theorem in Constructive Type Theory](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.FSCD.2022.9), **(🏆 [Award for Best Paper by Junior Researchers](https://fscd-conference.org/editions/best-paper-awards/))** *Marc Hermes, Dominik Kirst, FSCD 2022, Haifa, Israel,*
 3. [Modeling Peano Arithmetic in Constructive Type Theory (MA Thesis)](https://raw.githubusercontent.com/HermesMarc/Documents/main/thesis.pdf), *Marc Hermes, Saarland University, 2021*
-2. [Synthetic Undecidability and Incompleteness of First-Order Axiom Systems in Coq](https://drops.dagstuhl.de/opus/volltexte/2021/13918/pdf/LIPIcs-ITP-2021-23.pdf), *Dominik Kirst, Marc Hermes, ITP 2021, Rome, Italy, 2021*
+2. [Synthetic Undecidability and Incompleteness of First-Order Axiom Systems in Coq](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITP.2021.23), *Dominik Kirst, Marc Hermes, ITP 2021, Rome, Italy, 2021*
 1. Quantum memory for photons (BA Thesis), *Marc Hermes, Saarland University, 2017*
 
 
 ## Events
-<!-- Once I have more of these events, change the bullets to a numbering. Makes it look better -->
+<!-- Change the bullets to a numbering. -->
 
 
 - Participant: OPLSS 2023, Eugene, Portland, USA June-26 to July-7 2023 <!-- Exact Dates: June-26 to July-7 -->
