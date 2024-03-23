@@ -9,18 +9,18 @@ profile:
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>Netherlands, Nijmegen</p>
 
-news: true # includes a list of news items
+news: false # includes a list of news items
 latest_posts: true # includes a list of the newest posts
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+Originally I'm from Luxembourg and earned my Bachelor’s degree in Physics in Germany. During my Master’s program, I became very captivated by the use of computers to verify mathematical proofs, leading me to switch fields to Math in order to explore this further in my Master Thesis.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+While this makes me a mathematician by training, I’m arguably more of a logician by practice. As you can see below, I have done some work on the intersection of computer-verified mathematics, first-order arithmetic and computability theory, in particular making use of an approach coined synthetic computability.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+I am currently looking for a PhD position in the area of mathematical logic, interested in continuing research on **mechanized mathematics**, topics like **paraconsistent** logics, the boundaries of the **incompleteness theorems**, or combinations of these themes.
+
+If you are interested or have any pointers for me in this regard, please feel free to contact me!
