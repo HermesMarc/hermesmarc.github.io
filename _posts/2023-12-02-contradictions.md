@@ -21,7 +21,8 @@ Intuitively, both of them seem to simply express *"$$x$$ is strictly smaller the
 The first statement $$x < y \land \neg \, x < y$$ has the form $$A \land \neg A$$, and is therefore a contradiction for purely logical reasons. By this I mean that: for the contradiction to arise, it doesn't matter at all that we have a statement $$A := x < y$$ about numbers here.
 
 This is not the case for $$x < y \land y \leq x$$, since it does not have the form $$A \land \neg A$$. We can however argue that $$y \leq x$$ is equivalent to $$\neg \, x < y$$ , therefore allowing us to draw the same conclusion. Phew. Easy after all. 
-But let's consider yet another way to derive a contradiction here. For this approach, we need to dig up the axioms of arithmetic and the actual definitions of $$<$$ and $$\leq$$ in terms of successor, addition and equality.
+But let's consider yet another way to derive a contradiction here. 
+For this, we dig a bit deeper and look at the actual definitions of $$<$$ and $$\leq$$ in terms of successor, addition and equality.
 
 $$
 \begin{align*}

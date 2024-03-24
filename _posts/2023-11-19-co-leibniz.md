@@ -15,21 +15,21 @@ $$
  a \land b \leq c \iff a \leq (b \to c)
 $$
 
-If you imagine the $\leq$ to be another $$\to$$, then the above reads $$a \land b \to c \iff a \to (b \to c)$$  which should look like a familiar logical principle / currying of functions / adjunction of functors. The dualized identity in a co-Heyting algebra looks like this:
+If you imagine the $$\leq$$ to be another $$\to$$, then the above reads $$a \land b \to c \iff a \to (b \to c)$$  which should look like a familiar logical principle / currying of functions / adjunction of functors. The dualized identity in a co-Heyting algebra looks like this:
 
 $$
  a \leq b \lor c \iff (a \leftharpoondown b) \leq c
 $$
 
-And if you think of $\lor$ as $+$, then the above tells us that we can subtract $b$ on both sides of the left equation without breaking the inequality.
+And if you think of $$\lor$$ as $$+$$, then the above tells us that we can subtract $$b$$ on both sides of the left equation without breaking the inequality.
 
-Let's now move on to the main definition in co-Heyting algebras that I want to highlight here: the [*boundary*](https://ncatlab.org/nlab/show/co-Heyting+boundary#definition) of an element $s$, which is defined by
+Let's now move on to the main definition in co-Heyting algebras that I want to highlight here: the [*boundary*](https://ncatlab.org/nlab/show/co-Heyting+boundary#definition) of an element $$s$$, which is defined by
 
 $$
 	\partial s := s \land \neg s.
 $$
 
-One can then show that this definition of a boundary satisfies the Leibniz rule we know for example from calculus:
+The interesting thing about this definition of a boundary is that it satisfies the Leibniz rule familiar from calculus:
 
 $$
 	\partial (a \land b) = (\partial a \land b) \lor (a \land \partial b)
@@ -67,7 +67,7 @@ Qed.
 ```
 While I don't have a good intuitive grasp on why the equivalence holds, I *can* give a good pictorial view on how to think about both $$\partial$$ and $$\delta$$.
 
-Consider a Venn-diagram showing overlapping sets sets $$A$$ and $$B$$. We can then think of the boundary $$\partial A$$ as being the line that we would use to outline the set $$A$$, likewise for the boundary of other sets. The Leibniz identity then simply reflects a way to compute the boundary $$\partial (A \cap B)$$ based on the boundaries of $$A$$ and $$B$$.
+Consider a Venn-diagram showing overlapping sets sets $$A$$ and $$B$$. We can then think of the boundary $$\partial A$$ as the line that we would use to outline the set $$A$$, and likewise for the boundary of other sets. The Leibniz identity then simply reflects a way to compute the boundary $$\partial (A \cap B)$$ based on the boundaries of $$A$$ and $$B$$.
 A similar visual explanation holds up for $$\delta A$$; it consists of everything in the picture *except* the boundary $$\partial A$$.
 
 Apart from the connection to decidability I showed above, I have not yet encountered the co-Leibniz identity elsewhere *"in the wild"*, and the same goes for people I have asked so far. So if you have, I would be interested to hear about it!
