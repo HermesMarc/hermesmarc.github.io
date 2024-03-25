@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About Me
 permalink: /
 subtitle: 
 
@@ -16,7 +16,7 @@ news: true # includes a list of news items
 social: true # includes social icons at the bottom of the page
 ---
 
-Originally I'm from Luxembourg and earned my Bachelor’s degree in Physics in Germany. During my Master’s program, I became very captivated by the use of computers to verify mathematical proofs, leading me to switch fields to Math in order to explore this further in my Master Thesis.
+Originally I'm from Luxembourg and earned my Bachelor’s degree in **Physics** in Germany. During my Master’s program, I became very captivated by the use of computers to verify mathematical proofs, leading me to switch fields to **Mathematics** in order to explore this further in my Master Thesis.
 
 While this makes me a mathematician by training, I’m arguably more of a logician by practice. As you can see below, I have done some work on the intersection of computer-verified mathematics, first-order arithmetic and computability theory, in particular making use of an approach coined synthetic computability.
 
