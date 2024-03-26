@@ -5,10 +5,12 @@ on:
     branches:
       - master
       - main
+      - al-folio
   push:
     branches:
       - master
       - main
+      - al-folio
 
 jobs:
   check:

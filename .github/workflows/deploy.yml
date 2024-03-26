@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+      - al-folio
     paths:
       - "assets/**"
       - "**.html"
@@ -29,6 +30,7 @@ on:
     branches:
       - master
       - main
+      - al-folio
     paths:
       - "assets/**"
       - "**.html"
