@@ -43,7 +43,7 @@ $$
 \end{align*}
 $$
 
-Once we reach a remainder of $$0$$, telling us that $$\mathsf{gcd}(28, 23) = 1$$. 
+Once we reach a remainder of $$0$$, we can read off that $$\mathsf{gcd}(28, 23) = 1$$. 
 In order to get the Bézout coefficients we take all except the last equation, and 
 rewrite them such that the remainders end up isolated on one side:
 
