@@ -202,7 +202,7 @@ coefficients were simply computed along the side.
 
 The above works no matter which numbers we put into the last column of the augmented matrix: At the end of the computation for the gcd one of the rows on the left of the augmented matrix will always contain the Bézout coefficients. But why does it actually work? In order to justify why this really always works, we will prove the following result:
 
-**Theorem.** For any $a, b$ there is an invertible matrix $$R$$ such that
+**Theorem.** For any $$a, b$$ there is an invertible matrix $$R$$ such that
 
 $$
 R
