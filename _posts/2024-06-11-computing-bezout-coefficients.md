@@ -194,7 +194,7 @@ $$
 $$
 
 the last of which is our desired Bézout identity. Note that we did not 
-have to do any tedious revers substitutions or similar things! The 
+have to do any tedious reverse substitutions or similar things! The 
 coefficients were simply computed along the side.
 
 
@@ -215,7 +215,7 @@ R
 \end{bmatrix}
 $$
 
-*Proof.* We will do a proof by induction on the product $$n = a \cdot b$$. If $$n = 0$$ then one of the two numbers must already be $$0$$; let's say $$b = 0$$. We then have
+*Proof.* We will do a proof by induction on the product $$n = a b$$. If $$n = 0$$ then one of the two numbers must already be $$0$$; let's say $$b = 0$$. We then have
 
 $$
 \begin{bmatrix}
@@ -293,7 +293,7 @@ R
 \end{bmatrix}
 $$
 
-Where we let
+Where we put
 
 $$
 R := R' 
@@ -305,9 +305,9 @@ R := R'
 \end{bmatrix}
 $$
 
-This matrix is still invertible (since both matrices it is made up from are), so we have finished our induction step. $$\Box$$
+As a product of invertible matrices, $$R$$ is itself invertible, which concludes our induction step. $$\Box$$
 
-The above theorem implicitly tells us how to compute the matrix $$R$$, and I showcased the most convenient way to do so in the earlier example; we use the extended matrix and once the final column has the gcd, we know that the left part has the desired matrix $$R$$.
+The above theorem implicitly contains an algorithm to compute the matrix $$R$$, and I showcased the most convenient way to do so in the earlier example; we use the extended matrix and once the final column has the gcd, we know that the left part has the desired matrix $$R$$.
 
 Oh eh... you are still wondering why this is guaranteed to give us the Bézout coefficients? Well let's write out the matrix equation as:
 
