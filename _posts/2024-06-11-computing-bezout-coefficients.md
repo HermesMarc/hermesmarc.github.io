@@ -362,7 +362,7 @@ and at most implicitly alluded to in the one on the [extended Euclidean algorith
 
 ## Exercises
 
-1. Show that if $x \in \mathbb{Z}_n$ is invertible, then $\mathsf{gcd}(x,n) = 1$.
+1. Show that if $$x \in \mathbb{Z}_n$$ is invertible, then $$\mathsf{gcd}(x,n) = 1$$.
 2. Show that if there is an invertible integer matrix $$R$$ with $$R \,[\,a ~~ b\,]^t  = [\,g ~~ 0\,]^t$$, then we must have $$g = \mathsf{gcd}(a,b)$$.
 
 ---
