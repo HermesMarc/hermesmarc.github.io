@@ -215,19 +215,19 @@ The coefficients were simply computed along the way.
 
 The above works no matter which numbers we put into the last column of the augmented matrix: 
 At the end of the computation for the gcd one of the rows on the left of the augmented matrix will always contain the Bézout coefficients.
-But why does it actually work? In order to justify why this really always works, we will prove the following result:
+But why does it actually work? In order to justify this, we will prove the following result:
 
-> **Theorem.** For any $$a, b$$ there is an invertible matrix $$R$$ such that
+**Theorem.** For any $$a, b$$ there is an invertible integer matrix $$R$$ such that
 
 $$
-R
-\begin{bmatrix}
-	 a \\ b
-\end{bmatrix}
-= 
-\begin{bmatrix}
-	 \mathsf{gcd}(a,b) \\ 0
-\end{bmatrix}
+  R
+  \begin{bmatrix}
+    a \\ b
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+    \mathsf{gcd}(a,b) \\ 0
+  \end{bmatrix}
 $$
 
 *Proof.* We will do a proof by induction on the product $$n = a b$$. 
@@ -362,7 +362,8 @@ and at most implicitly alluded to in the one on the [extended Euclidean algorith
 
 ## Exercises
 
-1. Show that if there is an invertible integer matrix $$R$$ with $$R \,[\,a ~~ b\,]^t  = [\,g ~~ 0\,]^t$$, then we must have $$g = \mathsf{gcd}(a,b)$$.
+1. Show that if $x \in \mathbb{Z}_n$ is invertible, then $\mathsf{gcd}(x,n) = 1$.
+2. Show that if there is an invertible integer matrix $$R$$ with $$R \,[\,a ~~ b\,]^t  = [\,g ~~ 0\,]^t$$, then we must have $$g = \mathsf{gcd}(a,b)$$.
 
 ---
 
