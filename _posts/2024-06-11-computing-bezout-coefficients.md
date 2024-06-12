@@ -324,7 +324,7 @@ $$
 
 As a product of invertible matrices, $$R$$ is itself invertible, which concludes our induction step. $$\Box$$
 
-The above theorem implicitly contains an algorithm to compute the matrix $$R$$, and I showcased the most convenient way to do so in the earlier example; we use the extended matrix and once the final column has the gcd, we know that the left part has the desired matrix $$R$$.
+The above proof implicitly contains an algorithm to compute the matrix $$R$$, and I showcased the most convenient way to do so in the earlier example; we use the extended matrix, and once the final column has the gcd, we know that the left part has the desired matrix $$R$$.
 
 Oh eh... you are still wondering why this is guaranteed to give us the Bézout coefficients? 
 Well let's write out the matrix equation as:
@@ -345,7 +345,7 @@ $$
 \end{bmatrix}
 $$
 
-Here you can see that the row in which we find the gcd gives us the equation
+The first row corresponds to the equation
 
 $$
 	R_{11}a + R_{12}b = \mathsf{gcd}(a,b)
@@ -362,8 +362,8 @@ and at most implicitly alluded to in the one on the [extended Euclidean algorith
 
 ## Exercises
 
-1. Show that if $$x \in \mathbb{Z}_n$$ is invertible, then $$\mathsf{gcd}(x,n) = 1$$.
-2. Show that if there is an invertible integer matrix $$R$$ with $$R \,[\,a ~~ b\,]^t  = [\,g ~~ 0\,]^t$$, then we must have $$g = \mathsf{gcd}(a,b)$$.
+1. Show that if there is an invertible integer matrix $$R$$ with $$R \,[\,a ~~ b\,]^t  = [\,g ~~ 0\,]^t$$, then we must have $$g = \mathsf{gcd}(a,b)$$.
+2. Use 1. to show that if $$x \in \mathbb{Z}_n$$ is invertible, then $$\mathsf{gcd}(x,n) = 1$$.
 
 ---
 
