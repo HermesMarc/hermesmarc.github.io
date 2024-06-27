@@ -6,24 +6,24 @@ tags: [math, arithmetic, algorithm]
 related_posts: []
 ---
 
-If you have taken some courses in mathematics you will probably have 
-encountered Bézout's identity.
+If you have any courses in mathematics you will probably have 
+encountered the following at some point:
 
 $$
  \text{(Bézout's Identity)}~~~~\forall a,b \; \, \exists y_1,y_2.\;\; y_1a +y_2b = \mathsf{gcd}(a,b)  
 $$
 
 Any introductory course on algebra or number theory usually includes a section about modular arithmetic, where the identity pops up as a straightforward way to determine the multiplicative inverse of any element $$x \in \mathbb{Z}_n$$. 
-For an inverse to exist we must have $$\mathsf{gcd}(x,n) = 1$$, and by the identity we then get Bézout coefficients $$y_1, y_2$$ with
+If $$\mathsf{gcd}(x,n) = 1$$ then the identity provides us with Bézout coefficients $$y_1, y_2$$ satisfying
 
 $$
 	y_1 x + y_2 n = \mathsf{gcd}(x,n)=1
 $$
 
-for which then clearly $$y_1 x = 1 \; \mathsf{mod} \, n$$. 
+for which then clearly $$y_1 x = 1 \!\!\! \mod \! n$$. 
 Another critical use-case is usually encountered in constructing solutions in the [Chinese Remainder Theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem).
 
-While this shows the usefulness of the Bézout coefficients, it is usually a bit tedious to actually compute them. If your lectures were like mine, then you were first taught how to compute the gcd of two numbers by using the [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)--which is easy enough--but to then compute the Bézout coefficients it is necessary to keep track of the intermediary results of this computation, and reversely substitute them later. 
+While this shows the usefulness of the Bézout coefficients, it is usually a bit tedious to actually compute them. If your lectures were like mine, you were first taught how to compute the gcd of two numbers by using the [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)--which is easy enough--but to then compute the Bézout coefficients it is necessary to keep track of the intermediary results of this computation, and reversely substitute them later. 
 This is known as the [extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm).
 Maybe an example is in order to illustrate this; so let's compute the gcd of $$28$$ and $$23$$ and find Bézout coefficients for them. 
 We first run the Euclidean algorithm and keep track of all the intermediary equations:
@@ -38,7 +38,7 @@ $$
 \end{align*}
 $$
 
-Once we reach a remainder of $$0$$, we can read off that $$\mathsf{gcd}(28, 23) = 1$$. 
+We stop once we reach a remainder of $$0$$, knowing that the gcd is given by the last non-zero remainder, in this case therefore $$\mathsf{gcd}(28, 23) = 1$$.
 In order to get the Bézout coefficients we take all except the last equation, and rewrite them such that the remainders end up isolated on one side:
 
 $$
@@ -112,7 +112,7 @@ $$
 \end{bmatrix}
 $$
 
-The last column contains the numbers for which we want to compute the gcd, and we will do elementary row operations on this last last column, to effectively execute the reduction steps of the Euclidean algorithm. 
+The last column contains the numbers for which we want to compute the gcd, and we will do elementary row operations on this last column, to effectively execute the reduction steps of the Euclidean algorithm. 
 Crucially however, we apply these row operations to the whole augmented matrix. If we let $$\rho_i$$ stand for the $$i$$-th row, then the first step of executing the algorithm looks like this:
 
 $$
@@ -198,7 +198,7 @@ $$
 \end{bmatrix}
 $$
 
-Which is just matrix notation summarising the following two equations:
+Which is simply matrix notation summarising the following two equations:
 
 $$
 \begin{array}
@@ -232,25 +232,25 @@ $$
 
 *Proof.* We will do a proof by induction on the product $$n = a b$$. 
 If $$n = 0$$ then one of the two numbers must already be $$0$$; 
-let's say $$b = 0$$. We then have
+let's say $$a = 0$$. We then have
 
 $$
 \begin{bmatrix}
 \begin{array}{cc}	
-	1 & 0 \\
-	0 & 1 
+	0 & 1 \\
+	1 & 0 
 \end{array}
 \end{bmatrix}
 \begin{bmatrix}
-	 a \\ 0
+	 0 \\ b
 \end{bmatrix}
 = 
 \begin{bmatrix}
-	 a \\ 0
+	 b \\ 0
 \end{bmatrix}
 = 
 \begin{bmatrix}
-	 \mathsf{gcd}(a, 0) \\ 0
+	 \mathsf{gcd}(0, b) \\ 0
 \end{bmatrix}
 $$
 
@@ -324,7 +324,7 @@ $$
 
 As a product of invertible matrices, $$R$$ is itself invertible, which concludes our induction step. $$\Box$$
 
-The above proof implicitly contains an algorithm to compute the matrix $$R$$, and I showcased the most convenient way to do so in the earlier example; we use the extended matrix, and once the final column has the gcd, we know that the left part has the desired matrix $$R$$.
+The above proof implicitly contains an algorithm to compute the matrix $$R$$, and I showcased the most convenient way to execute it in the earlier example; we use the extended matrix, and once the final column has the gcd, we know that the left part has the desired matrix $$R$$.
 
 Oh eh... you are still wondering why this is guaranteed to give us the Bézout coefficients? 
 Well let's write out the matrix equation as:
