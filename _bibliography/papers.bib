@@ -64,3 +64,13 @@
   langid = {english},
   keywords = {Constructive type theory,Coq,First-order logic,Incompleteness,Peano arithmetic,Synthetic computability,Undecidability,ZF set theory}
 }
+
+
+@inproceedings{hermesAnalysisTennenbaumTheorem2022a,
+  abbr = {Conference},
+  title = {Modular {{Verification}} of Intrusive {{List}} and {{Tree Data Structures}} in {{Separation Logic}}},
+  author = {Hermes, Marc and Robbert Krebbers},
+  year = {2024},
+  abstract = {Intrusive linked data structures are commonly used in low-level programming languages such as~C for efficiency and to enable a form of generic types. Notably, intrusive versions of linked lists and search trees are used in the Linux kernel and the Boost C++ library. These data structures differ from ordinary data structures in the way that nodes contain only the meta data (\ie pointers to other nodes), but not the data itself. Instead the programmer needs to embed nodes into the data, thereby avoiding pointer indirections, and allowing data to be part of several data structures. In this paper we address the challenge of specifying and verifying intrusive data structures using separation logic. We aim for modular verification, where we first specify and verify the operations on the nodes (without the data) and then use these specifications to verify clients that attach data. We achieve this by employing a representation predicate that separates the data structure's node structure from the data that is attached to it. We apply our methodology to singly-linked lists---from which we build cyclic and doubly-linked lists---and binary trees---from which we build binary search trees. All verifications are conducted using the Coq proof assistant, making use of the Iris framework for separation logic.
+  }
+}
