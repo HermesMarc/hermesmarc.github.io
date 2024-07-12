@@ -6,7 +6,7 @@ tags: [math, arithmetic, algorithm]
 related_posts: []
 ---
 
-If you have any courses in mathematics you will probably have 
+If you had any courses in mathematics you will probably have 
 encountered the following at some point:
 
 $$
