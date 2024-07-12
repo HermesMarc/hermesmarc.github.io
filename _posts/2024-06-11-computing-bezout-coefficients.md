@@ -38,8 +38,9 @@ $$
 \end{align*}
 $$
 
-We stop once we reach a remainder of $$0$$, knowing that the gcd is given by the last non-zero remainder, in this case therefore $$\mathsf{gcd}(28, 23) = 1$$.
-In order to get the Bézout coefficients we take all except the last equation, and rewrite them such that the remainders end up isolated on one side:
+We stop once we reach a remainder of $$0$$, knowing that the gcd is given by the last non-zero remainder. 
+In this case we therefore $$\mathsf{gcd}(28, 23) = 1$$.
+In order to get the Bézout coefficients we take all except the last equation, and rewrite them in such a way that the remainders end up isolated on one side:
 
 $$
 \begin{align*}
@@ -96,7 +97,7 @@ $$
 $$
 
 Thus we can read off the Bézout coefficients $$y_1 = -9$$ and $$y_2 = 11$$. 
-As you can imagine this whole process can become quite tedious if the number of intermediary steps grows, and based on hands on experience as a student; the substitution with the subsequent simplification step is quite error prone when executed on paper.
+As you can imagine this whole process can become quite tedious if the number of intermediary steps grows, and based on hands on experience as a student I recall that the substitution and subsequent simplification steps are quite error prone when executed on paper.
 
 # A Better Way
 
@@ -179,7 +180,8 @@ $$
 \end{align*}
 $$
 
-You might have spotted that the previously computed Bézout coefficients $$y_1 = -9$$ and $$y_2 = 11$$ ominously appear in our end-result! But this is no coincidence. 
+You might have spotted that the previously computed Bézout coefficients $$y_1 = -9$$ and $$y_2 = 11$$ ominously appear in our end-result! 
+This is no mere coincidence!
 By the above computation we actually know that the following equation holds:
 
 $$
@@ -214,7 +216,7 @@ The coefficients were simply computed along the way.
 # Why it works
 
 The above works no matter which numbers we put into the last column of the augmented matrix: 
-At the end of the computation for the gcd one of the rows on the left of the augmented matrix will always contain the Bézout coefficients.
+At the end of the computation for the gcd, one of the rows on the left of the augmented matrix will always contain the Bézout coefficients.
 But why does it actually work? In order to justify this, we will prove the following result:
 
 **Theorem.** For any $$a, b$$ there is an invertible integer matrix $$R$$ such that
@@ -264,7 +266,7 @@ $$
 	a r < a(q a + r) = ab =n
 $$
 
-So by the induction hypothesis there is an invertible matrix $$R'$$ with
+So by strong induction there is an invertible matrix $$R'$$ with
 
 $$
 R'
