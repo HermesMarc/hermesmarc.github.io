@@ -70,7 +70,7 @@ github_username: hermesmarc # your GitHub user name
 gitlab_username: # your GitLab user name
 x_username: # your X handle
 mastodon_username: # your mastodon instance+username in the format instance.tld/@username
-linkedin_username: # your LinkedIn user name
+linkedin_username: marc-hermes-60b2bb319 # your LinkedIn user name
 telegram_username: # your Telegram user name
 scholar_userid: # your Google Scholar ID
 semanticscholar_id: # your Semantic Scholar ID
@@ -193,6 +193,7 @@ markdown: kramdown
 highlighter: rouge
 kramdown:
   input: GFM
+  math_engine: mathjax
   syntax_highlighter_opts:
     css_class: "highlight"
     span:
@@ -248,6 +249,7 @@ defaults:
       sitemap: false
 
 sass:
+  sass_dir: _sass
   style: compressed
 
 # -----------------------------------------------------------------------------
