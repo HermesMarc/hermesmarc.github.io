@@ -39,7 +39,7 @@ $$
 $$
 
 We stop once we reach a remainder of $$0$$, knowing that the gcd is given by the last non-zero remainder. 
-In this case we therefore $$\mathsf{gcd}(28, 23) = 1$$.
+So in this case we therefore have $$\mathsf{gcd}(28, 23) = 1$$.
 In order to get the Bézout coefficients we take all except the last equation, and rewrite them in such a way that the remainders end up isolated on one side:
 
 $$
@@ -234,7 +234,7 @@ $$
 
 *Proof.* We will do a proof by induction on the product $$n = a b$$. 
 If $$n = 0$$ then one of the two numbers must already be $$0$$; 
-let's say $$a = 0$$. We then have
+let's say $$a = 0$$ (the other case is similar). We then have
 
 $$
 \begin{bmatrix}
