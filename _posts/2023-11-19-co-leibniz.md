@@ -67,7 +67,7 @@ Qed.
 ```
 While I don't have a good intuitive grasp on why the equivalence holds, I *can* give a good pictorial view on how to think about both $$\partial$$ and $$\delta$$.
 
-Consider a Venn-diagram showing overlapping sets sets $$A$$ and $$B$$. We can then think of the boundary $$\partial A$$ as the line that we would use to outline the set $$A$$, and likewise for the boundary of other sets. The Leibniz identity then simply reflects a way to compute the boundary $$\partial (A \cap B)$$ based on the boundaries of $$A$$ and $$B$$.
+Consider a Venn-diagram showing overlapping sets $$A$$ and $$B$$. We can then think of the boundary $$\partial A$$ as the line that we would use to outline the set $$A$$, and likewise for the boundary of other sets. The Leibniz identity then simply reflects a way to compute the boundary $$\partial (A \cap B)$$ based on the boundaries of $$A$$ and $$B$$.
 A similar visual explanation holds up for $$\delta A$$; it consists of everything in the picture *except* the boundary $$\partial A$$.
 
 Apart from the connection to decidability I showed above, I have not yet encountered the co-Leibniz identity elsewhere *"in the wild"*, and the same goes for people I have asked so far. So if you have, I would be interested to hear about it!

@@ -16,27 +16,36 @@ $$
 \end{align}
 $$
 
-Intuitively, both of them seem to simply express *"$$x$$ is strictly smaller then $$y$$ and $$y$$ is less or equal to $$x$$"*, and intuition also tells us that this is a contradiction. While there is nothing to add to that conclusion, there *is* more to say about why both of them lead to a contradiction.
+Intuitively, both options simply seem to express *"$$x$$ is strictly smaller then $$y$$* and *$$y$$ is less or equal to $$x$$"*, and intuition also tells us that these statements are in contradiction to each other. 
+While there is nothing to add to that conclusion, there *is* more to say about why both cases lead to a contradiction.
 
-The first statement $$x < y \land \neg \, x < y$$ has the form $$A \land \neg A$$, and is therefore a contradiction for purely logical reasons. By this I mean that: for the contradiction to arise, it doesn't matter at all that we have a statement $$A := x < y$$ about numbers here.
+Statement $$(1)$$ has the form $$A \land \neg A$$, and is therefore a contradiction for purely logical reasons. 
+By this I mean that: We could replace $$A$$ with any statement we like, and 
+the combined expression $$A \land \neg A$$ would always be a contradiction.
+I didn't really matter that in our case $$A$$ had to do something with numbers.
 
-This is not the case for $$x < y \land y \leq x$$, since it does not have the form $$A \land \neg A$$. We can however argue that $$y \leq x$$ is equivalent to $$\neg \, x < y$$ , therefore allowing us to draw the same conclusion. Phew. Easy after all. 
+This is not the case for statement $$(2)$$; it does not have the form $$A \land \neg A$$! 
+We can however argue that $$y \leq x$$ is equivalent to $$\neg \, x < y$$ , therefore allowing us to draw the same conclusion. Phew. Easy after all. 
 But let's consider yet another way to derive a contradiction here. 
-For this, we dig a bit deeper and look at the actual definitions of $$<$$ and $$\leq$$ in terms of successor, addition and equality.
+For this, we dig a bit deeper and look at the actual definitions of $$<$$ and $$\leq$$ in terms of addition and equality.
 
 $$
 \begin{align*}
-	x < y &:= \exists k. ~ x + S k = y \\
-	y \leq x &:= \exists k. ~ y + k = x
+	a < b &:= \exists k. ~ a + k + 1 = b \\
+	a \leq b &:= \exists k. ~ a + k ~~~~~~~= b
 \end{align*}
 $$
 
-Given we start with $$x < y$$ and  $$y \leq x$$, we know that there are $$k$$ and $$k'$$ such that $$x + Sk = y$$, and $$y + k' = x$$. Combined this gives $$x + S k + k' = x$$, and by cancelling $$x$$ and both sides we get $$S(k + k') = 0$$.
-Aha! This latter conclusion is of course fishy. One of the axioms of Peano arithmetic tells us that $$\forall x. \neg \, S x  = 0$$, which then brings us to the contradiction $$S (k + k') = 0 \land \neg \, S (k + k') = 0$$. 
+Given we start with $$x < y$$ and  $$y \leq x$$, we know that there are $$k$$ and $$k'$$ such that $$x + k + 1 = y$$, and $$y + k' = x$$. Combined this gives $$x + k + 1 + k' = x$$, and by cancelling $$x$$ and both sides we get $$k + k' + 1 = 0$$.
+Aha! This latter conclusion is of course fishy. One of the axioms of Peano arithmetic tells us that $$\forall x \, \neg (x + 1 = 0)$$, which then brings us to the contradiction:
+
+$$
+  k + k' + 1 = 0 \land \neg (k + k' + 1 = 0).
+$$
 
 Let's highlight some of the things that happened in this last proof:
 
-- We arrive at a contradiction of the form $$A \land \neg A$$, but this time the statement $$A$$ is $$S (k + k') = 0$$.
+- We arrive at a contradiction of the form $$A \land \neg A$$, but this time the statement $$A$$ is $$k + k' + 1 = 0$$.
 - To arrive at this conclusion we needed to make use of several results about number theory, including cancelation, and the axiom which states that zero has no predecessors.
 
 This is in contrast to the very first contradiction we saw above, where it did not matter that we were dealing with a statement involving numbers. In hindsight, we should realise at this point that when we used the equivalence of $$y \leq x$$ and $$\neg \, x < y$$ as an easy way to the contradiction, we were forgetting that this equivalence also requires axioms in order to be shown. Oops.
