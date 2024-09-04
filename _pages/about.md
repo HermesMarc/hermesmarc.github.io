@@ -16,10 +16,8 @@ news: true # includes a list of news items
 social: true # includes social icons at the bottom of the page
 ---
 
-Originally I'm from Luxembourg. I did my undergrads in Germany, where I earned a Bachelor’s degree in **Physics** and a Master's in **Mathematics**. During my Master’s, I became very captivated by the use of computers to verify mathematical proofs, which was the reason I switched fields, since I wanted to explore this further in a Master Thesis.
+I'm originally from Spain, but I completed my undergraduate studies in Germany, where I earned a Bachelor's degree in **Physics** and a Master's in **Mathematics**. During my Master's program, I explored a variety of fields, including Machine Learning, Probability Theory, Topology, and Logic, before focusing my thesis within an intersection with computer science, on computer-assisted theorem proving.
 
-At the moment, I am somewhere on the spectrum between mathematician and logician. As you can see below, I have done some work on the intersection of computer-verified mathematics, first-order arithmetic and computability theory, in particular making use of an approach coined *synthetic computability*.
+Currently, I'm seeking opportunities in the fields of Data Science, Machine Learning, and AI. If you have any leads or suggestions in these areas, please don't hesitate to [reach out](https://www.linkedin.com/in/marc-h-60b2bb319)! I'm excited to explore these dynamic and rapidly evolving fields, and work on their applications to real world problems.
 
-I am currently looking for a PhD position in the area of mathematical logic, interested in continuing research on **mechanized mathematics**, topics like **paraconsistent logics**, the boundaries of the **incompleteness theorems**, or combinations of these themes.
-
-If you are interested or have any pointers for me in this regard, please feel free to reach out!
+I'm also still interested in topics spanning mechanized mathematics, paraconsistent logics, the incompleteness theorems and combinations of these themes; So you can expect to find some blog post about them here and there.
