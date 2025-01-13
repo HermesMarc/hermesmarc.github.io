@@ -21,9 +21,11 @@ $$
 $$
 
 for which then clearly $$y_1 x = 1 \!\!\! \mod \! n$$. 
-Another critical use-case is usually encountered in constructing solutions in the [Chinese Remainder Theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem).
+Another critical use-case is usually encountered when constructing solutions in the [Chinese Remainder Theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem).
 
-While this shows the usefulness of the Bézout coefficients, it is usually a bit tedious to actually compute them. If your lectures were like mine, you were first taught how to compute the gcd of two numbers by using the [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm)--which is easy enough--but to then compute the Bézout coefficients it is necessary to keep track of the intermediary results of this computation, and reversely substitute them later. 
+While this shows the usefulness of the Bézout coefficients, it is usually a bit tedious to actually compute them. 
+In lectures you are usually first thaught how to compute the gcd of two numbers by using the [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm), which turns out to be quite simple.
+But to then compute the Bézout coefficients this algorithm gets extended in a way that forces us to keep track of all intermediary results and to reversely substitute them later. 
 This is known as the [extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm).
 Maybe an example is in order to illustrate this; so let's compute the gcd of $$28$$ and $$23$$ and find Bézout coefficients for them. 
 We first run the Euclidean algorithm and keep track of all the intermediary equations:
@@ -39,7 +41,7 @@ $$
 $$
 
 We stop once we reach a remainder of $$0$$, knowing that the gcd is given by the last non-zero remainder. 
-So in this case we therefore have $$\mathsf{gcd}(28, 23) = 1$$.
+So in this case we can conclude that $$\mathsf{gcd}(28, 23) = 1$$.
 In order to get the Bézout coefficients we take all except the last equation, and rewrite them in such a way that the remainders end up isolated on one side:
 
 $$
@@ -97,7 +99,7 @@ $$
 $$
 
 Thus we can read off the Bézout coefficients $$y_1 = -9$$ and $$y_2 = 11$$. 
-As you can imagine this whole process can become quite tedious if the number of intermediary steps grows, and based on hands on experience as a student I recall that the substitution and subsequent simplification steps are quite error prone when executed on paper.
+As you can imagine this whole process can become quite tedious if the number of intermediary steps grows, and based on hands on experience as a student, I can assure you that the substitution and subsequent simplification steps are quite error prone when executed on paper.
 
 # A Better Way
 
@@ -113,8 +115,10 @@ $$
 \end{bmatrix}
 $$
 
-The last column contains the numbers for which we want to compute the gcd, and we will do elementary row operations on this last column, to effectively execute the reduction steps of the Euclidean algorithm. 
-Crucially however, we apply these row operations to the whole augmented matrix. If we let $$\rho_i$$ stand for the $$i$$-th row, then the first step of executing the algorithm looks like this:
+The left side is initialized as the identity matrix, and the right most column contains the numbers for which we want to compute the gcd. 
+Next, we will focus on executing elementary row operations which have to the effect that they execute the reduction steps of the Euclidean algorithm.
+Crucially however, we apply these row operations to the whole augmented matrix!
+If we let $$\rho_i$$ stand for the $$i$$-th row, then the first step of executing the algorithm looks like this:
 
 $$
 \begin{bmatrix}
@@ -123,7 +127,7 @@ $$
   0 & 1 & 23
 \end{array}
 \end{bmatrix}
-\longrightarrow
+=
 \begin{bmatrix}
 \begin{array}{cc|c}	
   1 & 0 & 1 \cdot 23 + 5 \\
@@ -258,8 +262,8 @@ $$
 
 So assume $$n > 0$$. We may assume that $$a < b$$ (the cases $$a = b$$ 
 and $$b < a$$ are either easy or similar). So by division with remainder 
-we get some $$q, r$$ such that $$b = q a + r$$ and $$r < a$$. Note that by 
-basic properties of the gcd we then have 
+we get some $$q, r$$ such that $$b = q a + r$$ and $$r < a$$. 
+Note that by basic properties of the gcd we then have 
 $$\mathsf{gcd}(a, b) = \mathsf{gcd}(a, r)$$. We also have
 
 $$
@@ -326,7 +330,7 @@ $$
 
 As a product of invertible matrices, $$R$$ is itself invertible, which concludes our induction step. $$\Box$$
 
-The above proof implicitly contains an algorithm to compute the matrix $$R$$, and I showcased the most convenient way to execute it in the earlier example; we use the extended matrix, and once the final column has the gcd, we know that the left part has the desired matrix $$R$$.
+The above proof implicitly contains an algorithm to compute the matrix $$R$$, and it's precisely the one I showcased in the earlier example; Start with the extended matrix, execute the Euclidean algorithm on the last column, and once it contains a $$0$$, we know that the left part has the desired matrix $$R$$.
 
 Oh eh... you are still wondering why this is guaranteed to give us the Bézout coefficients? 
 Well let's write out the matrix equation as:
