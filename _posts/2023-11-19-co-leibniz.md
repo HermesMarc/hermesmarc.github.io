@@ -50,7 +50,7 @@ $$
 	\delta (a \lor b) = (\delta a \lor b) \land (a \lor \delta b)
 $$
 
-This can be verified for any Heyting algebra, but below I give a quick verification of this fact by using the usual definition of decidability in the Coq proof assistant:
+This can be verified for any Heyting algebra, but below I give a quick verification of this fact by using the usual definition of decidability in the Rocq prover:
 ```
 Definition iffT (X Y: Type) : Type := (X -> Y) * (Y -> X).
 Notation "X <=> Y" := (iffT X Y) (at level 95).
