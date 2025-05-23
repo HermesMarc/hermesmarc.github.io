@@ -6,7 +6,7 @@ tags: [math, arithmetic, algorithm]
 related_posts: []
 ---
 
-If you had any courses in mathematics you will probably have 
+If you had some courses in mathematics you will probably have 
 encountered the following at some point:
 
 $$
@@ -23,7 +23,7 @@ $$
 for which then clearly $$y_1 x = 1 \!\!\! \mod \! n$$. 
 Another critical use-case is usually encountered when constructing solutions in the [Chinese Remainder Theorem](https://en.wikipedia.org/wiki/Chinese_remainder_theorem).
 
-While this shows the usefulness of the Bézout coefficients, it is usually a bit tedious to actually compute them. 
+While this shows the usefulness of the Bézout coefficients, it tends to be a bit tedious to actually compute them. 
 In lectures you are usually first thaught how to compute the gcd of two numbers by using the [Euclidean algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm), which turns out to be quite simple.
 But to then compute the Bézout coefficients this algorithm gets extended in a way that forces us to keep track of all intermediary results and to reversely substitute them later. 
 This is known as the [extended Euclidean algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm).
