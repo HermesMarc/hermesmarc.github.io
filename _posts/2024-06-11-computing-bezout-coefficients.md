@@ -236,7 +236,7 @@ $$
   \end{bmatrix}
 $$
 
-*Proof.* We will do a proof by induction on the product $$n = a b$$. 
+*Proof.* We will do a proof by induction on the product $$n = \min(a,b)$$. 
 If $$n = 0$$ then one of the two numbers must already be $$0$$; 
 let's say $$a = 0$$ (the other case is similar). We then have
 
@@ -267,7 +267,7 @@ Note that by basic properties of the gcd we then have
 $$\mathsf{gcd}(a, b) = \mathsf{gcd}(a, r)$$. We also have
 
 $$
-	a r < a(q a + r) = ab =n
+	\min(a, r) = r < a = \min(a, b) = n
 $$
 
 So by strong induction there is an invertible matrix $$R'$$ with
