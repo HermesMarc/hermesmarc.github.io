@@ -56,7 +56,7 @@ $$
 Now we eliminate $$2$$ in the last equation by substituting the expression we found in the equation above it:
 
 $$
-\begin{array}{rclcrl}
+\begin{array}{r@{\;}c@{\;}lcr@{\;}c@{\;}l}
     28 - 1 \cdot 23 &=& 5 & &  28 - 1 \cdot 23 &=& 5 \\
     23 - 4 \cdot 5 &=& 3  & & 23 - 4 \cdot 5 &=& 3 \\
     5 - 1 \cdot 3 &=& 2  & & & \\
@@ -69,9 +69,9 @@ $$
 Now eliminate $$3$$:
 
 $$
-\begin{array}{rclcrl}
-    28 - 1 \cdot 23 &=& 5 & &  28 - 1 \cdot 23 &=& 5 \\
-    23 - 4 \cdot 5 &=& 3  & & & & \\
+\begin{array}{r@{\;}c@{\;}lcr@{\;}c@{\;}l}
+    28 - 1 \cdot 23 & = & 5 & &  28 - 1 \cdot 23 & = & 5 \\
+    23 - 4 \cdot 5 & = & 3  & & & & \\
     2 \cdot (23 - 4 \cdot 5) - 1 \cdot 5 &=& \mathsf{gcd}(28, 23)
     & \longrightarrow & 
     2 \cdot 23 - 9 \cdot 5 &=& \mathsf{gcd}(28, 23)
@@ -81,7 +81,7 @@ $$
 And finally, eliminate $$5$$:
 
 $$
-\begin{array}{rclcrl}
+\begin{array}{r@{\;}c@{\;}lcr@{\;}c@{\;}l}
     28 - 1 \cdot 23 &=& 5 & & & & \\
     2 \cdot 23 - 9 \cdot (28 - 1 \cdot 23) &=& \mathsf{gcd}(28, 23) 
     & \longrightarrow & 
