@@ -247,6 +247,10 @@ defaults:
       path: "assets"
     values:
       sitemap: false
+  - scope:
+      path: "escher"
+    values:
+      sitemap: false
 
 sass:
   sass_dir: _sass
@@ -257,7 +261,7 @@ sass:
 # -----------------------------------------------------------------------------
 
 jekyll-minifier:
-  exclude: ["robots.txt"]
+  exclude: ["robots.txt", "escher/*", "escher/**/*"]
   uglifier_args:
     harmony: true
 
