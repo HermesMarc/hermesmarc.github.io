@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Print Gallery — Escher conformal mapping tool</title>
+<style>
+  :root {
+    --bg: #14151a;
+    --panel: #1d1f27;
+    --border: #2c2f3a;
+    --text: #e6e8ef;
+    --muted: #9aa0b0;
+    --accent: #6ea8fe;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+  }
+  /* Two columns, controls interleaved with the views -------- */
+  #grid { height: 100vh; display: flex; gap: 14px; padding: 14px; }
+  .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .pane { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .pane .caption { font-size: 11px; color: var(--muted); margin-bottom: 4px; height: 14px; }
+  .pane canvas {
+    flex: 1; min-height: 0; width: 100%; border: 1px solid var(--border);
+    border-radius: 6px; background: #000;
+  }
+  /* Canvas + floating overlay controls */
+  .view { position: relative; flex: 1; min-height: 0; display: flex; }
+  .overlay { position: absolute; top: 8px; right: 8px; display: flex; gap: 6px; }
+  .overlay-btn {
+    width: 30px; height: 30px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(20,21,26,0.72); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
+  }
+  .overlay-btn:hover { background: rgba(20,21,26,0.95); border-color: var(--accent); }
+  .overlay-text { width: auto; height: auto; padding: 7px 12px; font-size: 13px; font-weight: 600; }
+  #c1 { cursor: grab; }
+  #c2 { cursor: crosshair; }
+  #c3 { cursor: grab; }
+  #c4 { cursor: grab; }
+  /* Control bars -------------------------------------------- */
+  .bar { display: flex; align-items: center; gap: 14px; min-height: 32px; }
+  .bar.end { justify-content: flex-end; }
+  .bar .title { font-size: 14px; font-weight: 600; letter-spacing: 0.01em; }
+  .field { display: flex; align-items: center; gap: 6px; }
+  .field label {
+    font-size: 12px; color: var(--muted); white-space: nowrap;
+    cursor: ew-resize; user-select: none; -webkit-user-select: none;
+  }
+  input[type=number] {
+    width: 62px; background: #0f1014; color: var(--text);
+    border: 1px solid var(--border); border-radius: 5px; padding: 5px 6px;
+    font-size: 12px; font-variant-numeric: tabular-nums; text-align: right;
+    cursor: ew-resize;
+  }
+  input[type=number]:focus { outline: 1px solid var(--accent); cursor: text; }
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+  button {
+    background: var(--accent); color: #0b0d12; border: 0; border-radius: 6px;
+    padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  button.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  button:hover { filter: brightness(1.08); }
+  .checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .checkbox input { cursor: pointer; }
+  /* Export modal -------------------------------------------- */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+    display: flex; align-items: center; justify-content: center; z-index: 50;
+  }
+  .modal-backdrop[hidden] { display: none; }
+  .modal {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .modal .head { font-size: 13px; color: var(--text); }
+  .modal .head .sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+  #exportCanvas {
+    width: 72vmin; height: 72vmin; display: block;
+    background: #000; border: 1px solid var(--border); border-radius: 6px; cursor: grab;
+  }
+  .modal .foot { display: flex; align-items: center; gap: 10px; }
+  .modal .foot .field { flex: 1; }
+  .modal .foot .field input { flex: 1; width: auto; }
+  .modal .foot button { padding: 9px 16px; }
+  /* Tutorial -------------------------------------------------- */
+  #tutPanel {
+    position: fixed; z-index: 40; width: 370px; max-width: calc(100vw - 40px);
+    background: var(--panel); border: 1px solid var(--accent); border-radius: 10px;
+    padding: 14px 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  #tutPanel[hidden] { display: none; }
+  #tutPanel .tut-step { font-size: 11px; color: var(--muted); }
+  #tutPanel .tut-text { font-size: 13px; line-height: 1.55; }
+  #tutPanel .tut-text b { color: var(--accent); }
+  #tutPanel .tut-actions { display: flex; align-items: center; gap: 8px; }
+  #tutPanel .tut-actions .spacer { flex: 1; }
+  /* Panel positions hug the column split, adjacent to the step's view:
+     i(nner) t/b(op/bottom) l/r = which column the panel sits IN. */
+  .tut-itl { top: 54px; right: calc(50% + 10px); }
+  .tut-itr { top: 54px; left: calc(50% + 10px); }
+  .tut-ibl { bottom: 20px; right: calc(50% + 10px); }
+  .tut-ibr { bottom: 20px; left: calc(50% + 10px); }
+  .tut-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+  .tut-glow { box-shadow: 0 0 0 2px var(--accent), 0 0 16px rgba(110,168,254,0.55); border-radius: 6px; }
+  #grid .pane, #grid .bar { transition: filter 0.25s; }
+  .tut-dimmed { filter: brightness(0.5); }
+</style>
+</head>
+<body>
+  <div id="grid">
+    <!-- Left column: Source (1) above Tile (2) -->
+    <div class="col">
+      <div class="bar"><span class="title">Recreate Escher's Print Gallery Effect</span></div>
+      <div class="pane">
+        <div class="caption">1 · Source</div>
+        <div class="view">
+          <canvas id="c1"></canvas>
+          <div class="overlay">
+            <button class="overlay-btn overlay-text" id="chooseFile" title="Choose an image">Upload File</button>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <div class="field"><label data-for="rw">Width</label><input type="number" id="rw" step="0.05" min="0.05" data-scrub="0.01" value="1.20"></div>
+        <div class="field"><label data-for="rh">Height</label><input type="number" id="rh" step="0.05" min="0.05" data-scrub="0.01" value="6.283"></div>
+        <div class="field"><label data-for="blend">Tile Blend</label><input type="number" id="blend" step="0.01" min="0" max="0.5" data-scrub="0.005" value="0.0"></div>
+      </div>
+      <div class="pane">
+        <div class="caption">2 · Logarithm</div>
+        <div class="view">
+          <canvas id="c2"></canvas>
+          <div class="overlay">
+            <button class="overlay-btn" id="ul2" title="Upload an image to use as View 2" aria-label="Upload to View 2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20V9"/><path d="M7 14l5-5 5 5"/><path d="M5 4h14"/>
+              </svg>
+            </button>
+            <button class="overlay-btn" id="dl2" title="Download View 2 as PNG" aria-label="Download View 2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v11"/><path d="M7 9l5 5 5-5"/><path d="M5 20h14"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <div class="checkbox"><input type="checkbox" id="refMode"><label for="refMode">Reference Point</label></div>
+        <div class="checkbox"><input type="checkbox" id="wrapFill" checked><label for="wrapFill">Wrap Fill</label></div>
+      </div>
+    </div>
+
+    <!-- Right column: Result (4) above Transform (3) -->
+    <div class="col">
+      <div class="bar end"><button class="secondary" id="tutorial">Tutorial</button></div>
+      <div class="pane">
+        <div class="caption">4 · Result</div>
+        <div class="view">
+          <canvas id="c4"></canvas>
+          <div class="overlay">
+            <button id="save" class="overlay-btn" title="Download result as PNG" aria-label="Download result as PNG">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v11"/><path d="M7 9l5 5 5-5"/><path d="M5 20h14"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <div class="field"><label data-for="theta">Rotate</label><input type="number" id="theta" step="0.5" data-scrub="0.5" value="0"></div>
+        <div class="field"><label data-for="scale">Scale</label><input type="number" id="scale" step="0.01" min="0.05" data-scrub="0.005" value="1"></div>
+        <div class="field"><label data-for="tx">Re</label><input type="number" id="tx" step="0.01" data-scrub="0.01" value="0"></div>
+        <div class="field"><label data-for="ty">Im</label><input type="number" id="ty" step="0.01" data-scrub="0.01" value="0"></div>
+      </div>
+      <div class="pane">
+        <div class="caption">3 · Fully Tiled Plane</div>
+        <div class="view">
+          <canvas id="c3"></canvas>
+          <div class="overlay">
+            <button class="overlay-btn" id="ul3" title="Upload an image to tile across the plane" aria-label="Upload to View 3">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20V9"/><path d="M7 14l5-5 5 5"/><path d="M5 4h14"/>
+              </svg>
+            </button>
+            <button class="overlay-btn" id="dl3" title="Download View 3 as PNG" aria-label="Download View 3">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v11"/><path d="M7 9l5 5 5-5"/><path d="M5 20h14"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bar">
+        <button id="escher">Escher it!</button>
+        <button class="secondary" id="resetTf">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="exportModal" class="modal-backdrop" hidden>
+    <div class="modal">
+      <div class="head">Select export region
+        <div class="sub">Drag the rectangle to choose what to save · drag a corner to resize · drag the background to pan · scroll to zoom.</div>
+      </div>
+      <canvas id="exportCanvas"></canvas>
+      <div class="foot">
+        <div class="field"><label data-for="outSize">Size (px)</label><input type="number" id="outSize" step="256" min="256" max="8192" data-scrub="8" value="2048"></div>
+        <button class="secondary" id="exportCancel">Cancel</button>
+        <button id="exportConfirm">Save PNG</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tutPanel" class="tut-center" hidden>
+    <div class="tut-step" id="tutStep"></div>
+    <div class="tut-text" id="tutText"></div>
+    <div class="tut-actions">
+      <button class="secondary" id="tutExit">Exit</button>
+      <div class="spacer"></div>
+      <button class="secondary" id="tutAuto" hidden>Do it for me</button>
+      <button id="tutNext">Next</button>
+    </div>
+  </div>
+
+  <input type="file" id="file" accept="image/*" hidden />
+  <input type="file" id="uploadFile" accept="image/*" hidden />
+
+  <script src="app.js"></script>
+</body>
+</html>
