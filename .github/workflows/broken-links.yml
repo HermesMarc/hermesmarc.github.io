@@ -57,7 +57,8 @@ jobs:
         run: |
           set +e
           # excluded md files include liquid tags or root-relative sample links
-          lychee --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _pages/about_einstein.md --exclude-path _posts/2018-12-22-distill.md --no-progress './**/*.md' './**/*.html' > lychee-out.txt 2>&1
+          # unsplash.com sits behind a bot-wall that 401s CI runners
+          lychee --exclude 'unsplash\.com' --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _pages/about_einstein.md --exclude-path _posts/2018-12-22-distill.md --no-progress './**/*.md' './**/*.html' > lychee-out.txt 2>&1
           code=$?
           cat lychee-out.txt
           if [ "$code" -ne 0 ]; then
