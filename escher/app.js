@@ -157,7 +157,10 @@ void main() {
 // --- WebGL bootstrap -------------------------------------------------------
 
 const glCanvas = document.createElement("canvas");
-const gl = glCanvas.getContext("webgl2", { preserveDrawingBuffer: true, antialias: false });
+const gl = glCanvas.getContext("webgl2", {
+  preserveDrawingBuffer: true,
+  antialias: false,
+});
 if (!gl) {
   document.body.innerHTML =
     '<p style="color:#fff;padding:20px;font-family:sans-serif">WebGL2 is not available in this browser.</p>';
@@ -185,15 +188,35 @@ gl.useProgram(program);
 
 const quad = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, quad);
-gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+gl.bufferData(
+  gl.ARRAY_BUFFER,
+  new Float32Array([-1, -1, 3, -1, -1, 3]),
+  gl.STATIC_DRAW,
+);
 const aPos = gl.getAttribLocation(program, "aPos");
 gl.enableVertexAttribArray(aPos);
 gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
 const U = {};
-for (const name of ["uResolution", "uViewCenter", "uViewHalf", "uImgAspect", "uM", "uB",
-                    "uA", "uT", "uRectCenter", "uRectSize", "uOrigin", "uOverlap", "uStage",
-                    "uTexStage", "uTexMap", "uWrapFill", "uTex"]) {
+for (const name of [
+  "uResolution",
+  "uViewCenter",
+  "uViewHalf",
+  "uImgAspect",
+  "uM",
+  "uB",
+  "uA",
+  "uT",
+  "uRectCenter",
+  "uRectSize",
+  "uOrigin",
+  "uOverlap",
+  "uStage",
+  "uTexStage",
+  "uTexMap",
+  "uWrapFill",
+  "uTex",
+]) {
   U[name] = gl.getUniformLocation(program, name);
 }
 
@@ -215,13 +238,17 @@ const lastRegion = { 2: null, 3: null };
 // View 3 just selects the whole image as the tile by default.
 function uploadImage(img, view = 1) {
   imgAspect = img.naturalWidth / img.naturalHeight;
-  texStage = (view === 1) ? 1 : 2;
+  texStage = view === 1 ? 1 : 2;
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  gl.texParameteri(
+    gl.TEXTURE_2D,
+    gl.TEXTURE_MIN_FILTER,
+    gl.LINEAR_MIPMAP_LINEAR,
+  );
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
   gl.generateMipmap(gl.TEXTURE_2D);
   haveImage = true;
@@ -234,16 +261,26 @@ function uploadImage(img, view = 1) {
     if (r && Math.abs(r.hx / r.hy - imgAspect) < 1e-3 * imgAspect) {
       // Re-uploading what was just downloaded from this view: reuse its exact
       // plane rect, so the round-trip lines up pixel-for-pixel.
-      texMap.cx = r.cx; texMap.cy = r.cy; texMap.hx = r.hx; texMap.hy = r.hy;
+      texMap.cx = r.cx;
+      texMap.cy = r.cy;
+      texMap.hx = r.hx;
+      texMap.hy = r.hy;
     } else {
       // No prior download: map the image onto the canonical log rectangle.
-      texMap.cx = -0.5; texMap.cy = 0; texMap.hy = Math.PI; texMap.hx = Math.PI * imgAspect;
+      texMap.cx = -0.5;
+      texMap.cy = 0;
+      texMap.hy = Math.PI;
+      texMap.hx = Math.PI * imgAspect;
     }
     // Select the whole uploaded image as the tile: the rectangle covers it, so
     // its period matches the image and Views 3/4 tile + transform it. Centre the
     // reference point in the tile too.
-    rect.cx = texMap.cx; rect.cy = texMap.cy; rect.w = 2 * texMap.hx; rect.h = 2 * texMap.hy;
-    refPt.x = texMap.cx; refPt.y = texMap.cy;
+    rect.cx = texMap.cx;
+    rect.cy = texMap.cy;
+    rect.w = 2 * texMap.hx;
+    rect.h = 2 * texMap.hy;
+    refPt.x = texMap.cx;
+    refPt.y = texMap.cy;
   }
   render();
 }
@@ -262,11 +299,17 @@ const origin = { x: 0, y: 0 };
 // Reference point (log space) and two line endpoints, stored as integer tile
 // offsets from it. "Escher it!" can orient the recursion from this line.
 const refPt = { x: -0.5, y: 0 };
-const refEnds = [{ m: 0, n: 0 }, { m: 1, n: 1 }];
-let refDrag = null;   // while dragging a line end in View 3: { i, free:{x,y} }
+const refEnds = [
+  { m: 0, n: 0 },
+  { m: 1, n: 1 },
+];
+let refDrag = null; // while dragging a line end in View 3: { i, free:{x,y} }
 
 const cMul = (a, b) => ({ x: a.x * b.x - a.y * b.y, y: a.x * b.y + a.y * b.x });
-const cInv = (m) => { const d = m.x * m.x + m.y * m.y; return { x: m.x / d, y: -m.y / d }; };
+const cInv = (m) => {
+  const d = m.x * m.x + m.y * m.y;
+  return { x: m.x / d, y: -m.y / d };
+};
 const cAdd = (a, b) => ({ x: a.x + b.x, y: a.y + b.y });
 const cSub = (a, b) => ({ x: a.x - b.x, y: a.y - b.y });
 
@@ -275,15 +318,28 @@ function resetSource() {
   src.m = { x: imgAspect / half, y: 0 };
   src.b = { x: 0, y: 0 };
   views.v1.half = half;
-  origin.x = 0; origin.y = 0;
+  origin.x = 0;
+  origin.y = 0;
 }
 
 // View configs: pixel → plane is  center + p·half.
 const views = {
   v1: { key: "v1", canvas: null, stage: 1, center: { x: 0, y: 0 }, half: 2 },
   v4: { key: "v4", canvas: null, stage: 4, center: { x: 0, y: 0 }, half: 1.8 },
-  v2: { key: "v2", canvas: null, stage: 2, center: { x: -0.5, y: 0 }, half: Math.PI },
-  v3: { key: "v3", canvas: null, stage: 3, center: { x: -0.5, y: 0 }, half: Math.PI },
+  v2: {
+    key: "v2",
+    canvas: null,
+    stage: 2,
+    center: { x: -0.5, y: 0 },
+    half: Math.PI,
+  },
+  v3: {
+    key: "v3",
+    canvas: null,
+    stage: 3,
+    center: { x: -0.5, y: 0 },
+    half: Math.PI,
+  },
 };
 views.v1.canvas = document.getElementById("c1");
 views.v4.canvas = document.getElementById("c4");
@@ -315,7 +371,8 @@ function syncRectFields() {
 }
 // The tile affects View 2's overlay and the Views 3/4 tiling; the transform and
 // blend affect only Views 3 & 4. Repaint just those.
-const TILE_VIEWS = ["v2", "v3", "v4"], TWIST_VIEWS = ["v3", "v4"];
+const TILE_VIEWS = ["v2", "v3", "v4"],
+  TWIST_VIEWS = ["v3", "v4"];
 // Width grows to the left (right edge fixed); height grows up (bottom fixed).
 el.rw.addEventListener("input", () => {
   const right = rect.cx + rect.w / 2;
@@ -330,12 +387,20 @@ el.rh.addEventListener("input", () => {
   render(TILE_VIEWS);
 });
 // On leaving the field, show the actual stored value (reconciles any clamp).
-el.rw.addEventListener("change", () => { el.rw.value = fmtNum(rect.w); });
-el.rh.addEventListener("change", () => { el.rh.value = fmtNum(rect.h); });
-for (const id of ["blend", "theta", "scale", "tx", "ty"]) el[id].addEventListener("input", () => render(TWIST_VIEWS));
+el.rw.addEventListener("change", () => {
+  el.rw.value = fmtNum(rect.w);
+});
+el.rh.addEventListener("change", () => {
+  el.rh.value = fmtNum(rect.h);
+});
+for (const id of ["blend", "theta", "scale", "tx", "ty"])
+  el[id].addEventListener("input", () => render(TWIST_VIEWS));
 
 document.getElementById("resetTf").addEventListener("click", () => {
-  el.theta.value = 0; el.scale.value = 1; el.tx.value = 0; el.ty.value = 0;
+  el.theta.value = 0;
+  el.scale.value = 1;
+  el.tx.value = 0;
+  el.ty.value = 0;
   render();
 });
 
@@ -352,9 +417,11 @@ const wrapChk = document.getElementById("wrapFill");
 wrapChk.addEventListener("change", render);
 
 document.getElementById("escher").addEventListener("click", () => {
-  let D, mid = null;
+  let D,
+    mid = null;
   if (refChk.checked) {
-    const e0 = endLog(0), e1 = endLog(1);
+    const e0 = endLog(0),
+      e1 = endLog(1);
     D = cSub(e1, e0);
     mid = { x: (e0.x + e1.x) / 2, y: (e0.y + e1.y) / 2 };
   } else {
@@ -362,8 +429,11 @@ document.getElementById("escher").addEventListener("click", () => {
   }
   const a = { x: D.y / (2 * Math.PI), y: -D.x / (2 * Math.PI) };
   el.scale.value = Math.hypot(a.x, a.y).toFixed(4);
-  el.theta.value = (Math.atan2(a.y, a.x) * 180 / Math.PI).toFixed(2);
-  if (mid) { el.tx.value = mid.x.toFixed(4); el.ty.value = mid.y.toFixed(4); }
+  el.theta.value = ((Math.atan2(a.y, a.x) * 180) / Math.PI).toFixed(2);
+  if (mid) {
+    el.tx.value = mid.x.toFixed(4);
+    el.ty.value = mid.y.toFixed(4);
+  }
   render();
 });
 
@@ -371,13 +441,20 @@ function currentA() {
   // A typed Scale of 0 would make the transform singular (cInv divides by
   // |a|²); nudge it so overlay math stays finite. The min attribute doesn't
   // stop typed values, and num() must not clamp (see note there).
-  const s = num("scale") || 1e-9, t = (num("theta") * Math.PI) / 180;
+  const s = num("scale") || 1e-9,
+    t = (num("theta") * Math.PI) / 180;
   return [s * Math.cos(t), s * Math.sin(t)];
 }
-const aComplex = () => { const [x, y] = currentA(); return { x, y }; };
+const aComplex = () => {
+  const [x, y] = currentA();
+  return { x, y };
+};
 const tVec = () => ({ x: num("tx"), y: num("ty") });
 // A reference-point copy in log space (refPt + integer tile offset).
-const endLog = (i) => ({ x: refPt.x + refEnds[i].m * rect.w, y: refPt.y + refEnds[i].n * rect.h });
+const endLog = (i) => ({
+  x: refPt.x + refEnds[i].m * rect.w,
+  y: refPt.y + refEnds[i].n * rect.h,
+});
 // Log/source point <-> View 3 plane coord. View 3 maps zin -> a·zin + t, so a
 // source point P shows up at zin = a⁻¹·(P − t).
 const logToV3 = (P) => cMul(cInv(aComplex()), cSub(P, tVec()));
@@ -386,31 +463,47 @@ const v3ToLog = (zin) => cAdd(cMul(aComplex(), zin), tVec());
 // --- Drag-to-scrub on number fields ----------------------------------------
 
 function clampVal(input, v) {
-  if (input.min !== "" && !isNaN(parseFloat(input.min))) v = Math.max(v, parseFloat(input.min));
-  if (input.max !== "" && !isNaN(parseFloat(input.max))) v = Math.min(v, parseFloat(input.max));
+  if (input.min !== "" && !isNaN(parseFloat(input.min)))
+    v = Math.max(v, parseFloat(input.min));
+  if (input.max !== "" && !isNaN(parseFloat(input.max)))
+    v = Math.min(v, parseFloat(input.max));
   return v;
 }
 // Vertical distance (px) from the field at which scrub sensitivity is halved.
 const SCRUB_FALLOFF = 80;
 function attachScrub(handle, input) {
   const perPx = parseFloat(input.dataset.scrub || input.step || "1");
-  let active = false, moved = false, startX = 0, lastX = 0, baseY = 0, val = 0, pid = null;
+  let active = false,
+    moved = false,
+    startX = 0,
+    lastX = 0,
+    baseY = 0,
+    val = 0,
+    pid = null;
   handle.addEventListener("pointerdown", (e) => {
-    active = true; moved = false; startX = lastX = e.clientX;
+    active = true;
+    moved = false;
+    startX = lastX = e.clientX;
     const r = handle.getBoundingClientRect();
-    baseY = r.top + r.height / 2;             // the field's vertical centre
-    val = parseFloat(input.value) || 0; pid = e.pointerId;
+    baseY = r.top + r.height / 2; // the field's vertical centre
+    val = parseFloat(input.value) || 0;
+    pid = e.pointerId;
     handle.setPointerCapture?.(pid);
   });
   handle.addEventListener("pointermove", (e) => {
     if (!active) return;
-    if (!moved && Math.abs(e.clientX - startX) > 3) { moved = true; input.blur(); }
+    if (!moved && Math.abs(e.clientX - startX) > 3) {
+      moved = true;
+      input.blur();
+    }
     if (moved) {
       e.preventDefault();
       // Sensitivity falls off with vertical distance from the field: at its own
       // level it scrubs as before; moving away (up or down) gives finer control.
       const y = e.clientY - baseY;
-      const sens = (SCRUB_FALLOFF * SCRUB_FALLOFF) / (SCRUB_FALLOFF * SCRUB_FALLOFF + y * y);
+      const sens =
+        (SCRUB_FALLOFF * SCRUB_FALLOFF) /
+        (SCRUB_FALLOFF * SCRUB_FALLOFF + y * y);
       val = clampVal(input, val + (e.clientX - lastX) * perPx * sens);
       input.value = fmtNum(val);
       input.dispatchEvent(new Event("input", { bubbles: true }));
@@ -426,7 +519,10 @@ function attachScrub(handle, input) {
   handle.addEventListener("pointerup", end);
   handle.addEventListener("pointercancel", end);
   handle.addEventListener("click", (e) => {
-    if (handle.dataset.justScrubbed) { delete handle.dataset.justScrubbed; e.preventDefault(); }
+    if (handle.dataset.justScrubbed) {
+      delete handle.dataset.justScrubbed;
+      e.preventDefault();
+    }
   });
 }
 for (const id of ids) attachScrub(el[id], el[id]);
@@ -437,15 +533,18 @@ for (const label of document.querySelectorAll("label[data-for]")) {
 // --- Plane <-> pixel (device pixels) ---------------------------------------
 
 function pixToPlane(view, px, py) {
-  const c = view.canvas, aspect = c.width / c.height;
-  const fx = px / c.width, fy = 1 - py / c.height;
+  const c = view.canvas,
+    aspect = c.width / c.height;
+  const fx = px / c.width,
+    fy = 1 - py / c.height;
   return {
     x: view.center.x + (fx - 0.5) * 2 * aspect * view.half,
     y: view.center.y + (fy - 0.5) * 2 * view.half,
   };
 }
 function planeToPix(view, pt) {
-  const c = view.canvas, aspect = c.width / c.height;
+  const c = view.canvas,
+    aspect = c.width / c.height;
   const fx = (pt.x - view.center.x) / (2 * aspect * view.half) + 0.5;
   const fy = (pt.y - view.center.y) / (2 * view.half) + 0.5;
   return [fx * c.width, (1 - fy) * c.height];
@@ -453,8 +552,10 @@ function planeToPix(view, pt) {
 // Pointer client coords -> device pixels on a canvas.
 function evToPx(view, e) {
   const r = view.canvas.getBoundingClientRect();
-  return [(e.clientX - r.left) * (view.canvas.width / r.width),
-          (e.clientY - r.top) * (view.canvas.height / r.height)];
+  return [
+    (e.clientX - r.left) * (view.canvas.width / r.width),
+    (e.clientY - r.top) * (view.canvas.height / r.height),
+  ];
 }
 
 // Picture space <-> View 1 screen pixels.  Display: p = ζ·m + b.
@@ -468,8 +569,8 @@ function pToScreen(p) {
 // --- Rendering --------------------------------------------------------------
 
 function drawStage(view, w, h) {
-  if (glCanvas.width !== w) glCanvas.width = w;     // resizing reallocates the GL
-  if (glCanvas.height !== h) glCanvas.height = h;   // backbuffer; skip when unchanged
+  if (glCanvas.width !== w) glCanvas.width = w; // resizing reallocates the GL
+  if (glCanvas.height !== h) glCanvas.height = h; // backbuffer; skip when unchanged
   gl.viewport(0, 0, w, h);
   const [ar, ai] = currentA();
   gl.uniform2f(U.uResolution, w, h);
@@ -509,29 +610,43 @@ function cased(ctx, dpr, color = "#6ea8fe", w = 2) {
 
 // A draggable handle: white dot with a coloured outline over a dark halo.
 function drawHandle(ctx, x, y, dpr, stroke = "#6ea8fe") {
-  ctx.beginPath(); ctx.arc(x, y, 5 * dpr, 0, 2 * Math.PI);
-  ctx.fillStyle = "#fff"; ctx.fill();
+  ctx.beginPath();
+  ctx.arc(x, y, 5 * dpr, 0, 2 * Math.PI);
+  ctx.fillStyle = "#fff";
+  ctx.fill();
   cased(ctx, dpr, stroke);
 }
 // Four corners (bl, br, tr, tl) of an axis-aligned rect from centre + half-size.
 function rectCornersHalf(cx, cy, hx, hy) {
   return [
-    { x: cx - hx, y: cy - hy }, { x: cx + hx, y: cy - hy },
-    { x: cx + hx, y: cy + hy }, { x: cx - hx, y: cy + hy },
+    { x: cx - hx, y: cy - hy },
+    { x: cx + hx, y: cy - hy },
+    { x: cx + hx, y: cy + hy },
+    { x: cx - hx, y: cy + hy },
   ];
 }
 
 function drawRectOverlay() {
-  const view = views.v2, c = view.canvas, ctx = c.getContext("2d");
+  const view = views.v2,
+    c = view.canvas,
+    ctx = c.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
-  const corners = rectCornersHalf(rect.cx, rect.cy, rect.w / 2, rect.h / 2).map((p) => planeToPix(view, p));
+  const corners = rectCornersHalf(rect.cx, rect.cy, rect.w / 2, rect.h / 2).map(
+    (p) => planeToPix(view, p),
+  );
 
   // Faint tiled copies left/right to convey periodicity.
   ctx.lineWidth = 1 * dpr;
   ctx.strokeStyle = "rgba(110,168,254,0.25)";
   for (const k of [-2, -1, 1, 2]) {
-    const [x0, y0] = planeToPix(view, { x: rect.cx - rect.w / 2 + k * rect.w, y: rect.cy - rect.h / 2 });
-    const [x1, y1] = planeToPix(view, { x: rect.cx + rect.w / 2 + k * rect.w, y: rect.cy + rect.h / 2 });
+    const [x0, y0] = planeToPix(view, {
+      x: rect.cx - rect.w / 2 + k * rect.w,
+      y: rect.cy - rect.h / 2,
+    });
+    const [x1, y1] = planeToPix(view, {
+      x: rect.cx + rect.w / 2 + k * rect.w,
+      y: rect.cy + rect.h / 2,
+    });
     ctx.strokeRect(x0, y0, x1 - x0, y1 - y0);
   }
 
@@ -541,10 +656,10 @@ function drawRectOverlay() {
   cased(ctx, dpr);
   // Handles at the midpoint of each side (drag to change just width or height).
   const edges = [
-    { x: rect.cx - rect.w / 2, y: rect.cy },   // left
-    { x: rect.cx + rect.w / 2, y: rect.cy },   // right
-    { x: rect.cx, y: rect.cy + rect.h / 2 },   // top
-    { x: rect.cx, y: rect.cy - rect.h / 2 },   // bottom
+    { x: rect.cx - rect.w / 2, y: rect.cy }, // left
+    { x: rect.cx + rect.w / 2, y: rect.cy }, // right
+    { x: rect.cx, y: rect.cy + rect.h / 2 }, // top
+    { x: rect.cx, y: rect.cy - rect.h / 2 }, // bottom
   ].map((p) => planeToPix(view, p));
   for (const [x, y] of edges) drawHandle(ctx, x, y, dpr);
 
@@ -558,67 +673,99 @@ function drawRectOverlay() {
 // connected by a draggable line.
 function drawView3Refs() {
   if (!refChk.checked) return;
-  const view = views.v3, ctx = view.canvas.getContext("2d");
+  const view = views.v3,
+    ctx = view.canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
 
   // Visible source-space (zpre) bounds → lattice index range.
-  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-  for (const [x, y] of [[0, 0], [view.canvas.width, 0], [0, view.canvas.height], [view.canvas.width, view.canvas.height]]) {
+  let minX = Infinity,
+    maxX = -Infinity,
+    minY = Infinity,
+    maxY = -Infinity;
+  for (const [x, y] of [
+    [0, 0],
+    [view.canvas.width, 0],
+    [0, view.canvas.height],
+    [view.canvas.width, view.canvas.height],
+  ]) {
     const s = v3ToLog(pixToPlane(view, x, y));
-    minX = Math.min(minX, s.x); maxX = Math.max(maxX, s.x);
-    minY = Math.min(minY, s.y); maxY = Math.max(maxY, s.y);
+    minX = Math.min(minX, s.x);
+    maxX = Math.max(maxX, s.x);
+    minY = Math.min(minY, s.y);
+    maxY = Math.max(maxY, s.y);
   }
-  const m0 = Math.floor((minX - refPt.x) / rect.w), m1 = Math.ceil((maxX - refPt.x) / rect.w);
-  const n0 = Math.floor((minY - refPt.y) / rect.h), n1 = Math.ceil((maxY - refPt.y) / rect.h);
+  const m0 = Math.floor((minX - refPt.x) / rect.w),
+    m1 = Math.ceil((maxX - refPt.x) / rect.w);
+  const n0 = Math.floor((minY - refPt.y) / rect.h),
+    n1 = Math.ceil((maxY - refPt.y) / rect.h);
   if ((m1 - m0 + 1) * (n1 - n0 + 1) <= 4000) {
-    for (let m = m0; m <= m1; m++) for (let n = n0; n <= n1; n++) {
-      const [x, y] = planeToPix(view, logToV3({ x: refPt.x + m * rect.w, y: refPt.y + n * rect.h }));
-      drawHandle(ctx, x, y, dpr, "#9aa0b0");           // quiet grey copies
-    }
+    for (let m = m0; m <= m1; m++)
+      for (let n = n0; n <= n1; n++) {
+        const [x, y] = planeToPix(
+          view,
+          logToV3({ x: refPt.x + m * rect.w, y: refPt.y + n * rect.h }),
+        );
+        drawHandle(ctx, x, y, dpr, "#9aa0b0"); // quiet grey copies
+      }
   }
 
   // The two highlighted copies + connecting line (one end may be mid-drag).
   const e0 = refDrag && refDrag.i === 0 ? refDrag.free : endLog(0);
   const e1 = refDrag && refDrag.i === 1 ? refDrag.free : endLog(1);
-  const p0 = planeToPix(view, logToV3(e0)), p1 = planeToPix(view, logToV3(e1));
-  ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]);
+  const p0 = planeToPix(view, logToV3(e0)),
+    p1 = planeToPix(view, logToV3(e1));
+  ctx.beginPath();
+  ctx.moveTo(p0[0], p0[1]);
+  ctx.lineTo(p1[0], p1[1]);
   cased(ctx, dpr);
   for (const p of [p0, p1]) drawHandle(ctx, p[0], p[1], dpr);
 }
 
 function drawView1Overlay() {
-  const c = views.v1.canvas, ctx = c.getContext("2d");
+  const c = views.v1.canvas,
+    ctx = c.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
 
   // Origin pin (ζ = 0) — accent over a dark halo, visible on any background.
   const [ox, oy] = pToScreen(origin);
   const r = 9 * dpr;
-  ctx.beginPath(); ctx.arc(ox, oy, r, 0, 2 * Math.PI);
+  ctx.beginPath();
+  ctx.arc(ox, oy, r, 0, 2 * Math.PI);
   cased(ctx, dpr);
   ctx.beginPath();
-  ctx.moveTo(ox - r * 1.6, oy); ctx.lineTo(ox + r * 1.6, oy);
-  ctx.moveTo(ox, oy - r * 1.6); ctx.lineTo(ox, oy + r * 1.6);
+  ctx.moveTo(ox - r * 1.6, oy);
+  ctx.lineTo(ox + r * 1.6, oy);
+  ctx.moveTo(ox, oy - r * 1.6);
+  ctx.lineTo(ox, oy + r * 1.6);
   cased(ctx, dpr);
 }
 
 // Each view's 2D overlay, drawn on top of its blitted GL frame.
-const overlayFor = { v1: drawView1Overlay, v2: drawRectOverlay, v3: drawView3Refs };
+const overlayFor = {
+  v1: drawView1Overlay,
+  v2: drawRectOverlay,
+  v3: drawView3Refs,
+};
 
 // render() with no argument repaints every view; render(["v3","v4"]) repaints
 // only those. Dirty keys accumulate (union) until the next animation frame, so
 // batching never drops a view. Display-only interactions (pan/zoom of one view)
 // pass just that view; parameter changes pass the views they actually affect.
-let raf = 0, pendingAll = false;
+let raf = 0,
+  pendingAll = false;
 const pending = new Set();
 function render(dirty) {
   // dirty is a view-key array; anything else (no arg, or an Event when render is
   // used directly as a listener) means repaint everything.
-  if (Array.isArray(dirty)) { for (const k of dirty) pending.add(k); } else pendingAll = true;
+  if (Array.isArray(dirty)) {
+    for (const k of dirty) pending.add(k);
+  } else pendingAll = true;
   if (raf) return;
   raf = requestAnimationFrame(() => {
     raf = 0;
     const keys = pendingAll ? Object.keys(views) : [...pending];
-    pending.clear(); pendingAll = false;
+    pending.clear();
+    pendingAll = false;
     if (!haveImage) return;
     syncRectFields();
     const dpr = window.devicePixelRatio || 1;
@@ -663,33 +810,49 @@ views.v1.canvas.addEventListener("pointermove", (e) => {
   if (!v1Drag) return;
   const [px, py] = evToPx(views.v1, e);
   if (v1Drag.type === "pin") {
-    origin.x = screenToP(px, py).x; origin.y = screenToP(px, py).y;
-    render();                               // origin drives the whole mapping
-  } else {                                  // pan — View 1 display only
+    origin.x = screenToP(px, py).x;
+    origin.y = screenToP(px, py).y;
+    render(); // origin drives the whole mapping
+  } else {
+    // pan — View 1 display only
     const now = pixToPlane(views.v1, px, py);
-    const dm = cMul(src.m, { x: now.x - v1Drag.last.x, y: now.y - v1Drag.last.y });
-    src.b.x -= dm.x; src.b.y -= dm.y;
+    const dm = cMul(src.m, {
+      x: now.x - v1Drag.last.x,
+      y: now.y - v1Drag.last.y,
+    });
+    src.b.x -= dm.x;
+    src.b.y -= dm.y;
     v1Drag.last = pixToPlane(views.v1, px, py);
     render(["v1"]);
   }
 });
-const dropV1 = () => { v1Drag = null; views.v1.canvas.style.cursor = "grab"; };
+const dropV1 = () => {
+  v1Drag = null;
+  views.v1.canvas.style.cursor = "grab";
+};
 views.v1.canvas.addEventListener("pointerup", dropV1);
 views.v1.canvas.addEventListener("pointercancel", dropV1);
 
-views.v1.canvas.addEventListener("wheel", (e) => {
-  e.preventDefault();
-  const [px, py] = evToPx(views.v1, e);
-  const z0 = pixToPlane(views.v1, px, py);
-  const g = Math.exp(-e.deltaY * 0.0015);    // zoom factor about the cursor
-  scaleSourceAbout(z0, g);
-  render(["v1"]);                            // View 1 display only
-}, { passive: false });
+views.v1.canvas.addEventListener(
+  "wheel",
+  (e) => {
+    e.preventDefault();
+    const [px, py] = evToPx(views.v1, e);
+    const z0 = pixToPlane(views.v1, px, py);
+    const g = Math.exp(-e.deltaY * 0.0015); // zoom factor about the cursor
+    scaleSourceAbout(z0, g);
+    render(["v1"]); // View 1 display only
+  },
+  { passive: false },
+);
 
 // uv(ζ) = ζ·m + b. To keep ζ0's uv fixed while replacing m by m', set
 // b' = uv0 − ζ0·m'.
 function setSourceKeeping(z0, newM) {
-  const uv0 = { x: cMul(z0, src.m).x + src.b.x, y: cMul(z0, src.m).y + src.b.y };
+  const uv0 = {
+    x: cMul(z0, src.m).x + src.b.x,
+    y: cMul(z0, src.m).y + src.b.y,
+  };
   src.m = newM;
   const t = cMul(z0, src.m);
   src.b = { x: uv0.x - t.x, y: uv0.y - t.y };
@@ -703,14 +866,17 @@ function scaleSourceAbout(z0, g) {
 // `down(px,py,e)` may return a custom drag object handled by `move`; if it
 // returns null, a plain pan starts instead.
 function attachPanZoom(view, hooks = {}) {
-  const drawView = hooks.render || (() => render([view.key]));   // display-only: this view
-  const drawAll = hooks.render || render;                        // custom moves may affect others
+  const drawView = hooks.render || (() => render([view.key])); // display-only: this view
+  const drawAll = hooks.render || render; // custom moves may affect others
   let drag = null;
   view.canvas.addEventListener("pointerdown", (e) => {
     const [px, py] = evToPx(view, e);
     const custom = hooks.down ? hooks.down(px, py) : null;
     if (custom) drag = { custom };
-    else { drag = { pan: true, grab: pixToPlane(view, px, py) }; view.canvas.style.cursor = "grabbing"; }
+    else {
+      drag = { pan: true, grab: pixToPlane(view, px, py) };
+      view.canvas.style.cursor = "grabbing";
+    }
     view.canvas.setPointerCapture(e.pointerId);
   });
   view.canvas.addEventListener("pointermove", (e) => {
@@ -727,21 +893,29 @@ function attachPanZoom(view, hooks = {}) {
     }
   });
   const up = () => {
-    if (drag && drag.custom && hooks.up) { hooks.up(drag.custom); drawAll(); }
-    drag = null; view.canvas.style.cursor = "";
+    if (drag && drag.custom && hooks.up) {
+      hooks.up(drag.custom);
+      drawAll();
+    }
+    drag = null;
+    view.canvas.style.cursor = "";
   };
   view.canvas.addEventListener("pointerup", up);
   view.canvas.addEventListener("pointercancel", up);
-  view.canvas.addEventListener("wheel", (e) => {
-    e.preventDefault();
-    const [px, py] = evToPx(view, e);
-    const g = Math.exp(e.deltaY * 0.0015);     // wheel up -> zoom in (about cursor)
-    const p0 = pixToPlane(view, px, py);
-    view.half *= g;
-    view.center.x += (p0.x - view.center.x) * (1 - g);
-    view.center.y += (p0.y - view.center.y) * (1 - g);
-    drawView();
-  }, { passive: false });
+  view.canvas.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      const [px, py] = evToPx(view, e);
+      const g = Math.exp(e.deltaY * 0.0015); // wheel up -> zoom in (about cursor)
+      const p0 = pixToPlane(view, px, py);
+      view.half *= g;
+      view.center.x += (p0.x - view.center.x) * (1 - g);
+      view.center.y += (p0.y - view.center.y) * (1 - g);
+      drawView();
+    },
+    { passive: false },
+  );
 }
 
 // --- View 2: move / resize the tile rectangle (plus pan/zoom) --------------
@@ -766,8 +940,11 @@ function rectDown(px, py) {
     if (Math.hypot(cx - px, cy - py) < 12 * dpr) mode = e.id;
   });
   const here = pixToPlane(views.v2, px, py);
-  if (mode === null &&
-      Math.abs(here.x - rect.cx) < rect.w / 2 && Math.abs(here.y - rect.cy) < rect.h / 2) {
+  if (
+    mode === null &&
+    Math.abs(here.x - rect.cx) < rect.w / 2 &&
+    Math.abs(here.y - rect.cy) < rect.h / 2
+  ) {
     mode = "move";
   }
   return mode === null ? null : { mode, last: here };
@@ -837,20 +1014,33 @@ function loadFromInput(input, stage) {
   const f = input.files[0];
   if (!f) return;
   const img = new Image();
-  img.onload = () => { URL.revokeObjectURL(img.src); uploadImage(img, stage); };
-  img.onerror = () => { URL.revokeObjectURL(img.src); alert("Could not load that file as an image."); };
+  img.onload = () => {
+    URL.revokeObjectURL(img.src);
+    uploadImage(img, stage);
+  };
+  img.onerror = () => {
+    URL.revokeObjectURL(img.src);
+    alert("Could not load that file as an image.");
+  };
   img.src = URL.createObjectURL(f);
   input.value = "";
 }
 
 // The main source picker (Upload File) always loads a fresh source (stage 1).
-document.getElementById("file").addEventListener("change", (e) => loadFromInput(e.target, 1));
+document
+  .getElementById("file")
+  .addEventListener("change", (e) => loadFromInput(e.target, 1));
 
 // Per-view upload: a shared hidden input; uploadStage records the target view.
 let uploadStage = 2;
 const uploadFile = document.getElementById("uploadFile");
-uploadFile.addEventListener("change", (e) => loadFromInput(e.target, uploadStage));
-function triggerUpload(stage) { uploadStage = stage; uploadFile.click(); }
+uploadFile.addEventListener("change", (e) =>
+  loadFromInput(e.target, uploadStage),
+);
+function triggerUpload(stage) {
+  uploadStage = stage;
+  uploadFile.click();
+}
 
 // --- Export: pick the region in a popup, then save -------------------------
 
@@ -859,7 +1049,12 @@ const modal = document.getElementById("exportModal");
 // coordinates. The rectangle is what gets written to the PNG. exportStage picks
 // which view (2, 3 or 4) the modal previews and saves.
 let exportStage = 4;
-const exportView = { canvas: document.getElementById("exportCanvas"), stage: 4, center: { x: 0, y: 0 }, half: 2.2 };
+const exportView = {
+  canvas: document.getElementById("exportCanvas"),
+  stage: 4,
+  center: { x: 0, y: 0 },
+  half: 2.2,
+};
 const selRect = { cx: 0, cy: 0, hx: 1.6, hy: 1.6 };
 
 // The current tile as seen in a given view's plane coordinates. View 2 is the
@@ -870,36 +1065,62 @@ function tileCellRegion(stage) {
   if (stage === 2) {
     return { cx: rect.cx, cy: rect.cy, hx: rect.w / 2, hy: rect.h / 2 };
   }
-  const cs = rectCornersHalf(rect.cx, rect.cy, rect.w / 2, rect.h / 2).map(logToV3);
-  let lo = { x: Infinity, y: Infinity }, hi = { x: -Infinity, y: -Infinity };
+  const cs = rectCornersHalf(rect.cx, rect.cy, rect.w / 2, rect.h / 2).map(
+    logToV3,
+  );
+  let lo = { x: Infinity, y: Infinity },
+    hi = { x: -Infinity, y: -Infinity };
   for (const c of cs) {
-    lo.x = Math.min(lo.x, c.x); hi.x = Math.max(hi.x, c.x);
-    lo.y = Math.min(lo.y, c.y); hi.y = Math.max(hi.y, c.y);
+    lo.x = Math.min(lo.x, c.x);
+    hi.x = Math.max(hi.x, c.x);
+    lo.y = Math.min(lo.y, c.y);
+    hi.y = Math.max(hi.y, c.y);
   }
-  return { cx: (lo.x + hi.x) / 2, cy: (lo.y + hi.y) / 2, hx: (hi.x - lo.x) / 2, hy: (hi.y - lo.y) / 2 };
+  return {
+    cx: (lo.x + hi.x) / 2,
+    cy: (lo.y + hi.y) / 2,
+    hx: (hi.x - lo.x) / 2,
+    hy: (hi.y - lo.y) / 2,
+  };
 }
 
 function openExport(stage) {
-  if (!haveImage) { alert("Load an image first."); return; }
+  if (!haveImage) {
+    alert("Load an image first.");
+    return;
+  }
   exportStage = stage;
   exportView.stage = stage;
   if (stage === 4) {
-    exportView.center = { x: 0, y: 0 }; exportView.half = 2.2;
-    selRect.cx = 0; selRect.cy = 0; selRect.hx = 1.6; selRect.hy = 1.6;
-  } else {                                   // Views 2 & 3: default to one tile
+    exportView.center = { x: 0, y: 0 };
+    exportView.half = 2.2;
+    selRect.cx = 0;
+    selRect.cy = 0;
+    selRect.hx = 1.6;
+    selRect.hy = 1.6;
+  } else {
+    // Views 2 & 3: default to one tile
     const cell = tileCellRegion(stage);
-    selRect.cx = cell.cx; selRect.cy = cell.cy; selRect.hx = cell.hx; selRect.hy = cell.hy;
+    selRect.cx = cell.cx;
+    selRect.cy = cell.cy;
+    selRect.hx = cell.hx;
+    selRect.hy = cell.hy;
     exportView.center = { x: cell.cx, y: cell.cy };
     exportView.half = Math.max(cell.hx, cell.hy) * 1.6;
   }
   modal.hidden = false;
-  requestAnimationFrame(renderExport);       // wait for layout, then draw
+  requestAnimationFrame(renderExport); // wait for layout, then draw
 }
 
 function drawSelRect() {
   const ctx = exportView.canvas.getContext("2d");
   const dpr = window.devicePixelRatio || 1;
-  const corners = rectCornersHalf(selRect.cx, selRect.cy, selRect.hx, selRect.hy).map((p) => planeToPix(exportView, p));
+  const corners = rectCornersHalf(
+    selRect.cx,
+    selRect.cy,
+    selRect.hx,
+    selRect.hy,
+  ).map((p) => planeToPix(exportView, p));
   // Dim everything outside the selection.
   ctx.fillStyle = "rgba(0,0,0,0.5)";
   ctx.beginPath();
@@ -921,7 +1142,8 @@ function renderExport() {
   const cv = exportView.canvas;
   const w = Math.max(1, Math.floor(cv.clientWidth * dpr));
   const h = Math.max(1, Math.floor(cv.clientHeight * dpr));
-  cv.width = w; cv.height = h;
+  cv.width = w;
+  cv.height = h;
   drawStage(exportView, w, h);
   cv.getContext("2d").drawImage(glCanvas, 0, 0);
   drawSelRect();
@@ -929,15 +1151,23 @@ function renderExport() {
 
 function selDown(px, py) {
   const dpr = window.devicePixelRatio || 1;
-  const corners = rectCornersHalf(selRect.cx, selRect.cy, selRect.hx, selRect.hy);
+  const corners = rectCornersHalf(
+    selRect.cx,
+    selRect.cy,
+    selRect.hx,
+    selRect.hy,
+  );
   let mode = null;
   corners.forEach((cn, i) => {
     const [cx, cy] = planeToPix(exportView, cn);
     if (Math.hypot(cx - px, cy - py) < 12 * dpr) mode = i;
   });
   const here = pixToPlane(exportView, px, py);
-  if (mode === null &&
-      Math.abs(here.x - selRect.cx) < selRect.hx && Math.abs(here.y - selRect.cy) < selRect.hy) {
+  if (
+    mode === null &&
+    Math.abs(here.x - selRect.cx) < selRect.hx &&
+    Math.abs(here.y - selRect.cy) < selRect.hy
+  ) {
     mode = "move";
   }
   return mode === null ? null : { mode, last: here };
@@ -960,17 +1190,31 @@ function selMove(drag, px, py) {
   }
   drag.last = here;
 }
-attachPanZoom(exportView, { down: selDown, move: selMove, render: renderExport });
+attachPanZoom(exportView, {
+  down: selDown,
+  move: selMove,
+  render: renderExport,
+});
 
 // Per-view download (export) and upload buttons.
-document.getElementById("chooseFile").addEventListener("click", () => document.getElementById("file").click());
+document
+  .getElementById("chooseFile")
+  .addEventListener("click", () => document.getElementById("file").click());
 document.getElementById("save").addEventListener("click", () => openExport(4));
 document.getElementById("dl2").addEventListener("click", () => openExport(2));
 document.getElementById("dl3").addEventListener("click", () => openExport(3));
-document.getElementById("ul2").addEventListener("click", () => triggerUpload(2));
-document.getElementById("ul3").addEventListener("click", () => triggerUpload(3));
-document.getElementById("exportCancel").addEventListener("click", () => { modal.hidden = true; });
-modal.addEventListener("pointerdown", (e) => { if (e.target === modal) modal.hidden = true; });
+document
+  .getElementById("ul2")
+  .addEventListener("click", () => triggerUpload(2));
+document
+  .getElementById("ul3")
+  .addEventListener("click", () => triggerUpload(3));
+document.getElementById("exportCancel").addEventListener("click", () => {
+  modal.hidden = true;
+});
+modal.addEventListener("pointerdown", (e) => {
+  if (e.target === modal) modal.hidden = true;
+});
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !modal.hidden) modal.hidden = true;
 });
@@ -978,26 +1222,42 @@ window.addEventListener("keydown", (e) => {
 document.getElementById("exportConfirm").addEventListener("click", () => {
   const size = parseInt(el.outSize.value, 10) || 2048;
   // Output dimensions follow the selection's aspect; long edge = size.
-  let w = size, h = size;
-  if (selRect.hx >= selRect.hy) h = Math.round(size * selRect.hy / selRect.hx);
-  else w = Math.round(size * selRect.hx / selRect.hy);
-  const region = { stage: exportStage, center: { x: selRect.cx, y: selRect.cy }, half: selRect.hy };
+  let w = size,
+    h = size;
+  if (selRect.hx >= selRect.hy)
+    h = Math.round((size * selRect.hy) / selRect.hx);
+  else w = Math.round((size * selRect.hx) / selRect.hy);
+  const region = {
+    stage: exportStage,
+    center: { x: selRect.cx, y: selRect.cy },
+    half: selRect.hy,
+  };
   // Remember this region so re-uploading the saved image to the same view (2/3)
   // maps it back to exactly the same plane rect. Rounding w and h makes the
   // rendered half-width hy·w/h, not hx — store that, or the round-trip drifts.
   if (exportStage === 2 || exportStage === 3) {
-    lastRegion[exportStage] = { cx: selRect.cx, cy: selRect.cy, hx: selRect.hy * w / h, hy: selRect.hy };
+    lastRegion[exportStage] = {
+      cx: selRect.cx,
+      cy: selRect.cy,
+      hx: (selRect.hy * w) / h,
+      hy: selRect.hy,
+    };
   }
   drawStage(region, w, h);
   glCanvas.toBlob((blob) => {
-    if (!blob) { alert("Export failed — try a smaller size."); modal.hidden = true; render(); return; }
+    if (!blob) {
+      alert("Export failed — try a smaller size.");
+      modal.hidden = true;
+      render();
+      return;
+    }
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "print-gallery.png";
     a.click();
     URL.revokeObjectURL(a.href);
     modal.hidden = true;
-    render();                              // restore the main views
+    render(); // restore the main views
   }, "image/png");
 });
 
@@ -1020,7 +1280,8 @@ const TUT_STEPS = [
       17× smaller.`,
   },
   {
-    pos: "itr", targets: ["#c1"],
+    pos: "itr",
+    targets: ["#c1"],
     html: `<b>1 · Source.</b> The crosshair pin marks the point all nested
       copies converge on. Zoom in on the pin (scroll) and watch the room
       repeat and get blurrier as you go: That's because picture has finite resolution,
@@ -1030,7 +1291,8 @@ const TUT_STEPS = [
       drag the pin onto the centre of the recursion.`,
   },
   {
-    pos: "ibr", targets: ["#c2"],
+    pos: "ibr",
+    targets: ["#c2"],
     html: `<b>2 · Logarithm.</b> This is the logarithm of the picture, unrolled
       about the pin: circles around the pin become vertical lines, and zooming
       in becomes a step to the left. Because the picture contains itself, the
@@ -1038,7 +1300,8 @@ const TUT_STEPS = [
       we zoom in, the log picture gets blurrier towards the left.`,
   },
   {
-    pos: "ibr", targets: ["#c2", ".field:has(#rw)"],
+    pos: "ibr",
+    targets: ["#c2", ".field:has(#rw)"],
     html: `<b>Fit the tile.</b> The blue rectangle selects one period of the
       repetition — and this is the whole point of the tool: Views 3 and 4 are
       rebuilt from this single tile, so every nesting level comes out as sharp
@@ -1049,12 +1312,14 @@ const TUT_STEPS = [
       edge.`,
     auto() {
       const right = rect.cx + rect.w / 2;
-      rect.w = TUT_WIDTH; rect.cx = right - rect.w / 2;
+      rect.w = TUT_WIDTH;
+      rect.cx = right - rect.w / 2;
       render(TILE_VIEWS);
     },
   },
   {
-    pos: "ibl", targets: ["#c3", ".checkbox:has(#wrapFill)", ".field:has(#blend)"],
+    pos: "ibl",
+    targets: ["#c3", ".checkbox:has(#wrapFill)", ".field:has(#blend)"],
     html: `<b>3 · Fully Tiled Plane.</b> The plane rebuilt from your tile: the
       picture now continues at every scale, each level as crisp as the tile
       itself. Dark voids appear where the source picture ends: tick
@@ -1068,15 +1333,19 @@ const TUT_STEPS = [
     },
   },
   {
-    pos: "ibl", targets: ["#escher"],
+    pos: "ibl",
+    targets: ["#escher"],
     html: `<b>Escher it!</b> Now the twist: rotate and scale the tiled plane so
       that going once around the origin also steps exactly one tile — then the
       picture flows seamlessly into its own copy. You could try to achieve this 
       manually, but pressing <b>Escher it!</b> will do it for you!.`,
-    auto() { document.getElementById("escher").click(); },
+    auto() {
+      document.getElementById("escher").click();
+    },
   },
   {
-    pos: "itl", targets: ["#c4"],
+    pos: "itl",
+    targets: ["#c4"],
     html: `<b>4 · Result.</b> The Print Gallery effect. Follow the room once
       around the centre: you arrive inside the framed print, one nesting level
       deeper — with no seam. Zoom in and out; it repeats forever in both
@@ -1115,7 +1384,10 @@ function tutShow(i) {
   tutClearGlow();
   for (const sel of s.targets || []) {
     const g = document.querySelector(sel);
-    if (g) { g.classList.add("tut-glow"); tutGlow.push(g); }
+    if (g) {
+      g.classList.add("tut-glow");
+      tutGlow.push(g);
+    }
   }
   // Dim every pane/bar that doesn't contain a highlighted element, so the
   // step's spot is the bright one (steps without targets dim everything).
@@ -1125,14 +1397,15 @@ function tutShow(i) {
   tutEls.step.textContent = `Step ${i + 1} of ${TUT_STEPS.length}`;
   tutEls.text.innerHTML = s.html;
   tutEls.auto.hidden = !s.auto;
-  tutEls.next.textContent = (i === TUT_STEPS.length - 1) ? "Finish" : "Next";
+  tutEls.next.textContent = i === TUT_STEPS.length - 1 ? "Finish" : "Next";
   tutEls.panel.className = "tut-" + (s.pos || "center");
   tutEls.panel.hidden = false;
 }
 
 function tutEnd() {
   tutClearGlow();
-  for (const sec of document.querySelectorAll(".tut-dimmed")) sec.classList.remove("tut-dimmed");
+  for (const sec of document.querySelectorAll(".tut-dimmed"))
+    sec.classList.remove("tut-dimmed");
   tutIndex = -1;
   tutEls.panel.hidden = true;
 }
@@ -1154,22 +1427,36 @@ document.getElementById("tutorial").addEventListener("click", () => {
   const img = new Image();
   img.onload = () => {
     // A clean slate, so every step starts from the state it describes.
-    el.theta.value = 0; el.scale.value = 1; el.tx.value = 0; el.ty.value = 0;
+    el.theta.value = 0;
+    el.scale.value = 1;
+    el.tx.value = 0;
+    el.ty.value = 0;
     el.blend.value = 0;
-    refChk.checked = false; wrapChk.checked = false;
-    rect.cx = -0.5; rect.cy = 0; rect.w = 1.2; rect.h = 2 * Math.PI;
-    refPt.x = -0.5; refPt.y = 0;
-    refEnds[0] = { m: 0, n: 0 }; refEnds[1] = { m: 1, n: 1 };
-    views.v2.center = { x: -0.5, y: 0 }; views.v2.half = Math.PI;
-    views.v3.center = { x: -0.5, y: 0 }; views.v3.half = Math.PI;
-    views.v4.center = { x: 0, y: 0 }; views.v4.half = 1.8;
+    refChk.checked = false;
+    wrapChk.checked = false;
+    rect.cx = -0.5;
+    rect.cy = 0;
+    rect.w = 1.2;
+    rect.h = 2 * Math.PI;
+    refPt.x = -0.5;
+    refPt.y = 0;
+    refEnds[0] = { m: 0, n: 0 };
+    refEnds[1] = { m: 1, n: 1 };
+    views.v2.center = { x: -0.5, y: 0 };
+    views.v2.half = Math.PI;
+    views.v3.center = { x: -0.5, y: 0 };
+    views.v3.half = Math.PI;
+    views.v4.center = { x: 0, y: 0 };
+    views.v4.half = 1.8;
     lastRegion[2] = lastRegion[3] = null;
-    uploadImage(img, 1);        // resets View 1 + origin pin, and renders
+    uploadImage(img, 1); // resets View 1 + origin pin, and renders
     tutShow(0);
   };
-  img.onerror = () => alert(
-    `Could not load the tutorial image (${TUT_IMAGE}). ` +
-    `Serve the app folder over HTTP (e.g. python3 -m http.server) and reload.`);
+  img.onerror = () =>
+    alert(
+      `Could not load the tutorial image (${TUT_IMAGE}). ` +
+        `Serve the app folder over HTTP (e.g. python3 -m http.server) and reload.`,
+    );
   img.src = TUT_IMAGE;
 });
 
@@ -1184,9 +1471,11 @@ document.getElementById("tutorial").addEventListener("click", () => {
   // 8x8 orange/blue checkerboard with a half-scale copy of the whole image
   // nested recursively, scaling toward a fixed point inside the upper-right
   // quarter (not the corner) so the Droste centre sits within the image.
-  const px = SIZE * 0.625, py = SIZE * 0.375;          // recursion fixed point
+  const px = SIZE * 0.625,
+    py = SIZE * 0.375; // recursion fixed point
   function droste(cx, cy, size) {
-    const n = 8, s = size / n;
+    const n = 8,
+      s = size / n;
     for (let i = 0; i < n; i++)
       for (let j = 0; j < n; j++) {
         x.fillStyle = (i + j) % 2 ? "#2b6cb0" : "#f6ad55";
