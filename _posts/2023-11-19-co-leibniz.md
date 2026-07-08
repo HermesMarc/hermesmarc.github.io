@@ -72,4 +72,68 @@ While I don't have a good intuitive grasp on why the equivalence holds, I _can_ 
 Consider a Venn-diagram showing overlapping sets $A$ and $B$. We can then think of the boundary $\partial A$ as the line that we would use to outline the set $A$, and likewise for the boundary of other sets. The Leibniz identity then simply reflects a way to compute the boundary $\partial (A \cap B)$ based on the boundaries of $A$ and $B$.
 A similar visual explanation holds up for $\delta A$; it consists of everything in the picture _except_ the boundary $\partial A$.
 
+<style>
+.fig-coleibniz {
+  --fig-term1: #2a78d6;
+  --fig-term2: #eb6834;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem auto;
+  max-width: 680px;
+}
+html[data-theme="dark"] .fig-coleibniz {
+  --fig-term1: #3987e5;
+  --fig-term2: #d95926;
+}
+.fig-coleibniz svg {
+  flex: 1 1 190px;
+  max-width: 224px;
+  height: auto;
+  display: block;
+}
+.fig-coleibniz text {
+  font-family: inherit;
+}
+</style>
+
+<figure class="fig-coleibniz">
+  <svg viewBox="0 0 220 236" role="img" aria-label="Venn diagram of sets A and B where the outline of circle A is highlighted as the boundary of A">
+    <circle cx="80" cy="95" r="52" fill="var(--global-text-color)" fill-opacity="0.05"/>
+    <circle cx="140" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"/>
+    <circle cx="80" cy="95" r="52" fill="none" stroke="var(--fig-term1)" stroke-width="3.5"/>
+    <text x="55" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">A</text>
+    <text x="165" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">B</text>
+    <text x="110" y="200" text-anchor="middle" font-size="15.5" font-weight="600" fill="var(--global-text-color)">∂<tspan font-style="italic">A</tspan></text>
+    <text x="110" y="222" text-anchor="middle" font-size="12.5" fill="var(--global-text-color-light)">the outline of <tspan font-style="italic">A</tspan></text>
+  </svg>
+  <svg viewBox="0 0 220 236" role="img" aria-label="Venn diagram where the boundary of the intersection of A and B is split into the arc of the boundary of A inside B and the arc of the boundary of B inside A, in two colors">
+    <path d="M 110 52.5 A 52 52 0 0 1 110 137.5 A 52 52 0 0 1 110 52.5 Z" fill="var(--global-text-color)" fill-opacity="0.07"/>
+    <circle cx="80" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"/>
+    <circle cx="140" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"/>
+    <path d="M 110 52.5 A 52 52 0 0 1 110 137.5" fill="none" stroke="var(--fig-term1)" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M 110 137.5 A 52 52 0 0 1 110 52.5" fill="none" stroke="var(--fig-term2)" stroke-width="3.5" stroke-linecap="round"/>
+    <text x="55" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">A</text>
+    <text x="165" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">B</text>
+    <text x="110" y="200" text-anchor="middle" font-size="15.5" font-weight="600" fill="var(--global-text-color)">∂(<tspan font-style="italic">A</tspan> ∩ <tspan font-style="italic">B</tspan>)</text>
+    <line x1="24" y1="218" x2="42" y2="218" stroke="var(--fig-term1)" stroke-width="3.5" stroke-linecap="round"/>
+    <text x="48" y="222" font-size="12.5" fill="var(--global-text-color-light)">∂<tspan font-style="italic">A</tspan> ∩ <tspan font-style="italic">B</tspan></text>
+    <line x1="122" y1="218" x2="140" y2="218" stroke="var(--fig-term2)" stroke-width="3.5" stroke-linecap="round"/>
+    <text x="146" y="222" font-size="12.5" fill="var(--global-text-color-light)"><tspan font-style="italic">A</tspan> ∩ ∂<tspan font-style="italic">B</tspan></text>
+  </svg>
+  <svg viewBox="0 0 220 236" role="img" aria-label="The whole picture shaded except for a blank ring along the outline of circle A, illustrating that delta A is everything except the boundary of A">
+    <mask id="coleibniz-ring" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="236">
+      <rect x="0" y="0" width="220" height="236" fill="#fff"/>
+      <circle cx="80" cy="95" r="52" fill="none" stroke="#000" stroke-width="8"/>
+    </mask>
+    <rect x="8" y="16" width="204" height="158" rx="12" fill="var(--global-text-color)" fill-opacity="0.07" mask="url(#coleibniz-ring)"/>
+    <circle cx="140" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3" mask="url(#coleibniz-ring)"/>
+    <text x="55" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">A</text>
+    <text x="165" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">B</text>
+    <text x="110" y="200" text-anchor="middle" font-size="15.5" font-weight="600" fill="var(--global-text-color)">δ<tspan font-style="italic">A</tspan></text>
+    <text x="110" y="222" text-anchor="middle" font-size="12.5" fill="var(--global-text-color-light)">everything except ∂<tspan font-style="italic">A</tspan></text>
+  </svg>
+</figure>
+
 Apart from the connection to decidability I showed above, I have not yet encountered the co-Leibniz identity elsewhere _"in the wild"_, and the same goes for people I have asked so far. So if you have, I would be interested to hear about it!
