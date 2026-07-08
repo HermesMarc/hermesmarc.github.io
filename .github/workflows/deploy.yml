@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - main
-      - al-folio
+      - deploy
     paths:
       - "assets/**"
       - "**.html"
@@ -30,7 +30,7 @@ on:
     branches:
       - master
       - main
-      - al-folio
+      - deploy
     paths:
       - "assets/**"
       - "**.html"

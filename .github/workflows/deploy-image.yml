@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - main
-      - al-folio
+      - deploy
     paths:
       - "bin/entry_point.sh"
       - "Dockerfile"
