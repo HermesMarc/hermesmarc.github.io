@@ -46,23 +46,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install lychee
-        run: |
-          curl -sfL https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C "$RUNNER_TEMP"
-          sudo install -t /usr/local/bin "$RUNNER_TEMP/lychee-x86_64-unknown-linux-gnu/lychee"
-
       - name: Link Checker 🔗
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          set +e
-          # excluded md files include liquid tags or root-relative sample links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          # excluded md files include liquid tags or root-relative sample links;
           # unsplash.com sits behind a bot-wall that 401s CI runners
-          lychee --exclude 'unsplash\.com' --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _pages/about_einstein.md --exclude-path _posts/2018-12-22-distill.md --no-progress './**/*.md' './**/*.html' > lychee-out.txt 2>&1
-          code=$?
-          cat lychee-out.txt
-          if [ "$code" -ne 0 ]; then
-            # surface failures as annotations (visible without opening logs)
-            grep '^\[' lychee-out.txt | head -10 | while IFS= read -r line; do echo "::error::$line"; done
-          fi
-          exit $code
+          args: --exclude 'unsplash\.com' --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _pages/about_einstein.md --exclude-path _posts/2018-12-22-distill.md --verbose --no-progress './**/*.md' './**/*.html'
