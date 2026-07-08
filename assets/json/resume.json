@@ -98,16 +98,19 @@
       "level": "Bachelor",
       "icon": "",
       "keywords": [
-        "Classical Mechanics", "Electrostatics", "Statistical Mechanics", "Quantum Mechanics", "Thermodynamics", "Special Relativity"
+        "Classical Mechanics",
+        "Electrostatics",
+        "Statistical Mechanics",
+        "Quantum Mechanics",
+        "Thermodynamics",
+        "Special Relativity"
       ]
     },
     {
       "name": "Mathematics",
       "level": "Master",
       "icon": "",
-      "keywords": [
-        "Topology", "Probability Theory", "Machine Learning"
-      ]
+      "keywords": ["Topology", "Probability Theory", "Machine Learning"]
     }
   ],
   "languages": [

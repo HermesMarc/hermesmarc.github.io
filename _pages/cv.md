@@ -8,4 +8,3 @@ cv_pdf: website-cv.pdf
 description:
 toc:
 ---
-
