@@ -53,3 +53,11 @@ jobs:
           lycheeVersion: v0.24.2
           # removed md files that include liquid tags or root-relative sample links
           args: --exclude-path README.md --exclude-path _pages/404.md --exclude-path _pages/blog.md --exclude-path _pages/about_einstein.md --exclude-path _posts/2018-12-22-distill.md --verbose --no-progress './**/*.md' './**/*.html'
+
+      - name: Print failing links
+        if: failure()
+        run: |
+          split -b 3000 lychee/out.md /tmp/lychee_chunk_
+          for f in /tmp/lychee_chunk_*; do
+            echo "::error::$(tr '\n' ' ' < "$f")"
+          done
