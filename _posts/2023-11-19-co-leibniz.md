@@ -67,73 +67,84 @@ Proof.
 Qed.
 ```
 
-While I don't have a good intuitive grasp on why the equivalence holds, I _can_ give a good pictorial view on how to think about both $\partial$ and $\delta$.
+While I don't have a good intuitive grasp on why the equivalence holds, there is a good pictorial view on how to think about both $\partial$ and $\delta$.
 
 Consider a Venn-diagram showing overlapping sets $A$ and $B$. We can then think of the boundary $\partial A$ as the line that we would use to outline the set $A$, and likewise for the boundary of other sets. The Leibniz identity then simply reflects a way to compute the boundary $\partial (A \cap B)$ based on the boundaries of $A$ and $B$.
 A similar visual explanation holds up for $\delta A$; it consists of everything in the picture _except_ the boundary $\partial A$.
 
 <style>
-.fig-coleibniz {
-  --fig-term1: #2a78d6;
-  --fig-term2: #eb6834;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 2rem auto;
-  max-width: 680px;
-}
-html[data-theme="dark"] .fig-coleibniz {
-  --fig-term1: #3987e5;
-  --fig-term2: #d95926;
-}
-.fig-coleibniz svg {
-  flex: 1 1 190px;
-  max-width: 224px;
-  height: auto;
-  display: block;
-}
-.fig-coleibniz text {
-  font-family: inherit;
-}
+.venn-widget { --fig-accent: #2a78d6; margin: 2rem auto; max-width: 500px; user-select: none; -webkit-user-select: none; }
+html[data-theme="dark"] .venn-widget { --fig-accent: #3987e5; }
+.venn-widget .vw-controls { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 6px; margin-bottom: 0.75rem; }
+.venn-widget .vw-ctl { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.venn-widget .vw-controls button { font: inherit; font-size: 0.85rem; padding: 4px 14px; border-radius: 999px; border: 1px solid var(--global-divider-color); background: transparent; color: var(--global-text-color); cursor: pointer; }
+.venn-widget .vw-controls button:hover { border-color: var(--fig-accent); }
+.venn-widget .vw-controls button.active { border-color: var(--fig-accent); color: var(--fig-accent); font-weight: 600; }
+.venn-widget .vw-sub { display: flex; gap: 4px; }
+.venn-widget .vw-sub button { font-size: 0.72rem; padding: 2px 9px; color: var(--global-text-color-light); }
+.venn-widget svg { display: block; width: 100%; height: auto; touch-action: none; }
+.venn-widget .vw-grip { cursor: grab; }
+.venn-widget .vw-grip.dragging { cursor: grabbing; }
+.venn-widget figcaption { text-align: center; font-size: 0.85rem; color: var(--global-text-color-light); margin-top: 0.5rem; line-height: 1.5; }
+.venn-widget .vw-cap { color: var(--global-text-color); font-size: 0.95rem; }
+.venn-widget .vw-t1, .venn-widget .vw-t2 { font-weight: 600; color: var(--global-text-color-light); }
+.venn-widget .vw-t1.on, .venn-widget .vw-t2.on { color: var(--fig-accent); }
+.venn-widget .vw-note { min-height: 1.3em; }
 </style>
 
-<figure class="fig-coleibniz">
-  <svg viewBox="0 0 220 236" role="img" aria-label="Venn diagram of sets A and B where the outline of circle A is highlighted as the boundary of A">
-    <circle cx="80" cy="95" r="52" fill="var(--global-text-color)" fill-opacity="0.05"/>
-    <circle cx="140" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"/>
-    <circle cx="80" cy="95" r="52" fill="none" stroke="var(--fig-term1)" stroke-width="3.5"/>
-    <text x="55" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">A</text>
-    <text x="165" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">B</text>
-    <text x="110" y="200" text-anchor="middle" font-size="15.5" font-weight="600" fill="var(--global-text-color)">∂<tspan font-style="italic">A</tspan></text>
-    <text x="110" y="222" text-anchor="middle" font-size="12.5" fill="var(--global-text-color-light)">the outline of <tspan font-style="italic">A</tspan></text>
+<figure class="venn-widget">
+  <div class="vw-controls" aria-label="Choose what to display">
+    <div class="vw-ctl">
+      <button class="vw-main active" data-mode="dA" aria-pressed="true">∂<i>A</i></button>
+    </div>
+    <div class="vw-ctl">
+      <button class="vw-main" data-mode="deltaA" aria-pressed="false">δ<i>A</i></button>
+    </div>
+    <div class="vw-ctl">
+      <button class="vw-main" data-mode="dAB" aria-pressed="false">∂(<i>A</i> ∧ <i>B</i>)</button>
+      <div class="vw-sub" data-sub="dAB" style="display:none">
+        <button data-term="1" aria-pressed="true" class="active">∂<i>A</i> ∧ <i>B</i></button>
+        <button data-term="2" aria-pressed="true" class="active"><i>A</i> ∧ ∂<i>B</i></button>
+      </div>
+    </div>
+    <div class="vw-ctl">
+      <button class="vw-main" data-mode="deltaAB" aria-pressed="false">δ(<i>A</i> ∨ <i>B</i>)</button>
+      <div class="vw-sub" data-sub="deltaAB" style="display:none">
+        <button data-term="1" aria-pressed="true" class="active">δ<i>A</i> ∨ <i>B</i></button>
+        <button data-term="2" aria-pressed="true" class="active"><i>A</i> ∨ δ<i>B</i></button>
+      </div>
+    </div>
+  </div>
+  <svg id="vw-svg" viewBox="0 0 460 320" role="img" aria-label="Interactive Venn diagram of two sets A and B illustrating the boundary and decidability operators">
+    <defs>
+      <mask id="vw-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="460" height="320">
+        <rect x="0" y="0" width="460" height="320" fill="#fff"></rect>
+        <path id="vw-cut1" d="" fill="none" stroke="#000" stroke-width="9"></path>
+        <path id="vw-cut2" d="" fill="none" stroke="#000" stroke-width="9"></path>
+      </mask>
+    </defs>
+    <g mask="url(#vw-mask)">
+      <rect id="vw-wash" x="6" y="6" width="448" height="308" rx="14" fill="var(--fig-accent)" fill-opacity="0.09" style="display:none"></rect>
+      <path id="vw-lens" d="" fill="var(--global-text-color)" fill-opacity="0.07"></path>
+      <circle id="vw-hairA" cx="185" cy="160" r="80" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"></circle>
+      <circle id="vw-hairB" cx="292" cy="160" r="66" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"></circle>
+      <path id="vw-arc1" d="M 105 160 A 80 80 0 1 0 265 160 A 80 80 0 1 0 105 160" fill="none" stroke="var(--fig-accent)" stroke-width="4" stroke-linecap="round"></path>
+      <path id="vw-arc2" d="" fill="none" stroke="var(--fig-accent)" stroke-width="4" stroke-linecap="round"></path>
+    </g>
+    <text id="vw-labA" x="145" y="165" text-anchor="middle" font-size="16" font-style="italic" fill="var(--global-text-color-light)">A</text>
+    <text id="vw-labB" x="325" y="165" text-anchor="middle" font-size="16" font-style="italic" fill="var(--global-text-color-light)">B</text>
+    <circle id="vw-gripA" class="vw-grip" cx="185" cy="160" r="80" fill="transparent"></circle>
+    <circle id="vw-gripB" class="vw-grip" cx="292" cy="160" r="66" fill="transparent"></circle>
   </svg>
-  <svg viewBox="0 0 220 236" role="img" aria-label="Venn diagram where the boundary of the intersection of A and B is split into the arc of the boundary of A inside B and the arc of the boundary of B inside A, in two colors">
-    <path d="M 110 52.5 A 52 52 0 0 1 110 137.5 A 52 52 0 0 1 110 52.5 Z" fill="var(--global-text-color)" fill-opacity="0.07"/>
-    <circle cx="80" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"/>
-    <circle cx="140" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3"/>
-    <path d="M 110 52.5 A 52 52 0 0 1 110 137.5" fill="none" stroke="var(--fig-term1)" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M 110 137.5 A 52 52 0 0 1 110 52.5" fill="none" stroke="var(--fig-term2)" stroke-width="3.5" stroke-linecap="round"/>
-    <text x="55" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">A</text>
-    <text x="165" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">B</text>
-    <text x="110" y="200" text-anchor="middle" font-size="15.5" font-weight="600" fill="var(--global-text-color)">∂(<tspan font-style="italic">A</tspan> ∩ <tspan font-style="italic">B</tspan>)</text>
-    <line x1="24" y1="218" x2="42" y2="218" stroke="var(--fig-term1)" stroke-width="3.5" stroke-linecap="round"/>
-    <text x="48" y="222" font-size="12.5" fill="var(--global-text-color-light)">∂<tspan font-style="italic">A</tspan> ∩ <tspan font-style="italic">B</tspan></text>
-    <line x1="122" y1="218" x2="140" y2="218" stroke="var(--fig-term2)" stroke-width="3.5" stroke-linecap="round"/>
-    <text x="146" y="222" font-size="12.5" fill="var(--global-text-color-light)"><tspan font-style="italic">A</tspan> ∩ ∂<tspan font-style="italic">B</tspan></text>
-  </svg>
-  <svg viewBox="0 0 220 236" role="img" aria-label="The whole picture shaded except for a blank ring along the outline of circle A, illustrating that delta A is everything except the boundary of A">
-    <mask id="coleibniz-ring" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="236">
-      <rect x="0" y="0" width="220" height="236" fill="#fff"/>
-      <circle cx="80" cy="95" r="52" fill="none" stroke="#000" stroke-width="8"/>
-    </mask>
-    <rect x="8" y="16" width="204" height="158" rx="12" fill="var(--global-text-color)" fill-opacity="0.07" mask="url(#coleibniz-ring)"/>
-    <circle cx="140" cy="95" r="52" fill="none" stroke="var(--global-text-color-light)" stroke-opacity="0.8" stroke-width="1.3" mask="url(#coleibniz-ring)"/>
-    <text x="55" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">A</text>
-    <text x="165" y="100" text-anchor="middle" font-size="14" font-style="italic" fill="var(--global-text-color-light)">B</text>
-    <text x="110" y="200" text-anchor="middle" font-size="15.5" font-weight="600" fill="var(--global-text-color)">δ<tspan font-style="italic">A</tspan></text>
-    <text x="110" y="222" text-anchor="middle" font-size="12.5" fill="var(--global-text-color-light)">everything except ∂<tspan font-style="italic">A</tspan></text>
-  </svg>
+  <figcaption>
+    <div class="vw-cap" data-cap="dA">∂<i>A</i> — the outline of <i>A</i></div>
+    <div class="vw-cap" data-cap="deltaA" style="display:none">δ<i>A</i> — everything except the boundary ∂<i>A</i></div>
+    <div class="vw-cap" data-cap="dAB" style="display:none">∂(<i>A</i> ∧ <i>B</i>) = <span class="vw-t1 on">(∂<i>A</i> ∧ <i>B</i>)</span> ∨ <span class="vw-t2 on">(<i>A</i> ∧ ∂<i>B</i>)</span></div>
+    <div class="vw-cap" data-cap="deltaAB" style="display:none">δ(<i>A</i> ∨ <i>B</i>) = <span class="vw-t1 on">(δ<i>A</i> ∨ <i>B</i>)</span> ∧ <span class="vw-t2 on">(<i>A</i> ∨ δ<i>B</i>)</span></div>
+    <div class="vw-note" id="vw-note"></div>
+  </figcaption>
 </figure>
+
+<script src="{{ '/assets/js/venn-coleibniz.js' | relative_url }}" defer></script>
 
 Apart from the connection to decidability I showed above, I have not yet encountered the co-Leibniz identity elsewhere _"in the wild"_, and the same goes for people I have asked so far. So if you have, I would be interested to hear about it!
