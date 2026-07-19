@@ -5,8 +5,8 @@ title: "Escher it!"
 tags: [art, math]
 ---
 
-One of 3Blue1Brown's recent videos dived deep into the connection between Escher's famous picture [_The Print Gallery_](https://en.wikipedia.org/wiki/Print_Gallery_%28M._C._Escher%29) and it's connection to logarithms in the complex plane.
-I won't dive into it though, because you really ought to watch the video!
+One of [3Blue1Brown](https://www.youtube.com/@3blue1brown/featured)'s recent videos dived deep into the connection between Escher's famous picture [The Print Gallery](https://en.wikipedia.org/wiki/Print_Gallery_%28M._C._Escher%29) and it's connection to logarithms in the complex plane.
+I won't give anything away though, because you really ought to watch it yourself!
 
 <div style="position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 2rem 0">
   <iframe
@@ -18,7 +18,7 @@ I won't dive into it though, because you really ought to watch the video!
   ></iframe>
 </div>
 
-It's a truly fascinating watch, and it compelled me to sit down with one of the chatbots to create a simple webpage which allows you to create your very own picture with the same effect. You can find it [here]({{ '/escher/' | relative_url }}).
+It's truly inspiring to watch, so much so that it compelled me to sit down with one of the chatbots to create a simple webpage which allows you to create your very own picture with the same effect, which you can find [here]({{ '/escher/' | relative_url }}).
 For using it, all you need is a [recursive picture](https://en.wikipedia.org/wiki/Droste_effect), or you can try it out right away by following the built-in tutorial.
 
 <div style="text-align: center; margin: 2.5rem 0">
