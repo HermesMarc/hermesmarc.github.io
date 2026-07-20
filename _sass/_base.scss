@@ -512,6 +512,13 @@ footer.sticky-bottom {
   h1 {
     color: var(--global-theme-color);
     font-size: 5rem;
+
+    .blog-name-icon {
+      height: 0.8em;
+      width: auto;
+      vertical-align: baseline;
+      margin-right: 0.15em;
+    }
   }
 }
 

@@ -24,7 +24,11 @@ pagination:
 {% if blog_name_size > 0 or blog_description_size > 0 %}
 
   <div class="header-bar">
-    <h1>{{ site.blog_name }}</h1>
+    <h1><img
+        src="{{ '/assets/img/favicon.ico' | relative_url }}"
+        alt=""
+        class="blog-name-icon"
+      />{{ site.blog_name }}</h1>
     <h2>{{ site.blog_description }}</h2>
   </div>
   {% endif %}
