@@ -13,7 +13,7 @@ I won't give anything away though, because you really ought to watch it yourself
     src="https://www.youtube.com/embed/ldxFjLJ3rVY"
     title="How (and why) to take a logarithm of an image — 3Blue1Brown"
     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 6px"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allow="clipboard-write; encrypted-media; picture-in-picture; web-share"
     allowfullscreen
   ></iframe>
 </div>
