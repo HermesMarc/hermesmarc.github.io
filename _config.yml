@@ -122,7 +122,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: MƎ⅃oИ # blog_name will be displayed in your blog page (the icon before it is set in _pages/blog.md)
-blog_description: Trying to be constructive
+blog_description: Thinking constructively
 permalink: /blog/:year/:title/
 
 # Pagination
