@@ -152,7 +152,7 @@ What I would much rather want to do, is to make the chatbot do the work, and the
 
 ---
 
-# Bézout to the rescue
+# Bézout to the Rescue
 
 Up to now it seems that in order to verify that $1$ is the only common divisor of $131$ and $236$, we have to do a lot of manual checking. With this in mind, the next thing I'll show you hopefully seems a bit like magic, because knowing about this will save us from doing **all** of that work.
 
@@ -162,9 +162,7 @@ $$
 131 \cdot x_1  + 236 \cdot  x_2 = 1,
 $$
 
-that is, if we multiply $131$ respectively $236$ with them and add the results up, we get $1$.
-
-What we will now see right away, is that this allows us to immediately conclude that $a$ and $b$ must be disjoint.
+that is, if we multiply $131$ respectively $236$ with them and add the results up, we get $1$. We then have the following result:
 
 <div class="callout" markdown="1">
 **Lemma:** If there are $x_1, x_2 \in \mathbb{Z}$ with $a x_1  + b x_2 = 1$, then $1$ is the _only_ common divisor of $a$ and $b$.
@@ -207,8 +205,6 @@ $$
 You also shouldn't believe _me_ either though, check it for yourself!!
 
 And by our earlier lemma then, this conclusively settles that the greatest common divisor of $131$ and $236$ is indeed $1$.
-
----
 
 # Computing Bézout Coefficients
 
@@ -258,7 +254,7 @@ $$
  131 \cdot x_1 + 236 \cdot x_2 = 1
 $$
 
-with the already familiar values $x_1 = -9$, $x_2 = 5$.
+with the already familiar values $x_1 = -9$, $x_2 = 5$. So now you know how to compute them yourself!
 
 ## Time to ponder...
 
@@ -266,6 +262,8 @@ with the already familiar values $x_1 = -9$, $x_2 = 5$.
 2. Are $x_1 = -9, x_2 = 5$ the only values which satisfy the equation $131 \cdot x_1 + 236 \cdot x_2 = 1$ ?
 3. Run the above algorithm for the original (incorrect) measurements, meaning with $a = 126$ and $b = 231$. What do you find?
 4. We showed how one equation can be used to show that two numbers are disjoint. Is there a way to extend this to three or $n$ numbers?
+
+---
 
 # In Summary
 
