@@ -106,6 +106,10 @@ As the table shows, it was good to be skeptical. Up to $21$, the listed numbers 
 
 leading to a total of $6 \times 11 = 66$ tiles, which is much more manageable.
 
+
+{% include figure.liquid loading="eager" path="assets/img/some4-tiling-options.png" class="img-fluid rounded z-depth-1 post-figure" alt="" %}
+
+
 # Oh the Irony...
 
 Speaking of making mistakes: After double checking my measurements to make sure that I wouldn't regret ordering wrong tiles, I realized that I actually forgot to account for the length of the body of the tape measure I used... 🤦‍♂
