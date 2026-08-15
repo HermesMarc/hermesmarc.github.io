@@ -74,7 +74,7 @@ _styles: >
   }
 ---
 
-This is my entry for [SoME4](https://some.3b1b.co).
+This is my entry for the 2026 edition of [SoME](https://some.3b1b.co).
 
 ---
 
@@ -150,6 +150,8 @@ What I would much rather want to do, is to make the chatbot do the work, and the
 1. In the above table, why did I leave out numbers beyond $d = 131$? Is it not necessary to check them?
 2. Since checking that none of the numbers $2, 3, 4, 5, \dots, 131$ divide both $131$ and $236$ by hand sounds like a lot of work, why not ask the chatbot to create a table with that information for us? Wouldn't that allow us to skip the most tedious part (calculating) and just have a look at the results?
 
+---
+
 # Bézout to the rescue
 
 Up to now it seems that in order to verify that $1$ is the only common divisor of $131$ and $236$, we have to do a lot of manual checking. With this in mind, the next thing I'll show you hopefully seems a bit like magic, because knowing about this will save us from doing **all** of that work.
@@ -165,7 +167,7 @@ that is, if we multiply $131$ respectively $236$ with them and add the results u
 What we will now see right away, is that this allows us to immediately conclude that $a$ and $b$ must be disjoint.
 
 <div class="callout" markdown="1">
-**Lemma:** If there are $x_1, x_2 \in \mathbb{Z}$ such that $a x_1  + b x_2 = 1$, then $1$ is the _only_ common divisor of $a$ and $b$.
+**Lemma:** If there are $x_1, x_2 \in \mathbb{Z}$ with $a x_1  + b x_2 = 1$, then $1$ is the _only_ common divisor of $a$ and $b$.
 </div>
 
 <div class="callout callout-proof" markdown="1">
@@ -205,6 +207,8 @@ $$
 You also shouldn't believe _me_ either though, check it for yourself!!
 
 And by our earlier lemma then, this conclusively settles that the greatest common divisor of $131$ and $236$ is indeed $1$.
+
+---
 
 # Computing Bézout Coefficients
 
@@ -272,3 +276,5 @@ What have we learned?
 - Always verify the answers a chatbot gives you.
 
 And now you'll have to excuse me; I have just received a delivery of $30\,916$ tiny bathroom tiles, so I have quite some work ahead of me.
+
+---
