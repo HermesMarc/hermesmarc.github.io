@@ -1,18 +1,43 @@
-{% assign have_related_posts = false %}
-{% for post in site.related_posts | limit: site.related_blog_posts.max_related %}
-  {% unless have_related_posts %}
-    {% assign have_related_posts = true %}
-    <br>
-    <hr>
-    <br>
-    <ul class="list-disc pl-8"></ul>
+{% comment %}
+  Related posts shown at the end of an article.
 
-    <!-- Adds related posts to the end of an article -->
-    <h2 class="text-3xl font-semibold mb-4 mt-12">Found This Interesing?</h2>
-    <p class="mb-2">Here are some more posts you might like to read next:</p>
-  {% endunless %}
+  A post may name its own related posts in front matter, by slug or file name:
 
-  <li class="my-2">
-    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-  </li>
+    related_posts:
+      - computing-bezout-coefficients
+
+  If it doesn't (`related_posts: true`, or the key is absent), Jekyll's own
+  `site.related_posts` is used, which is simply the most recent posts.
+  Setting `related_posts: false` skips this include entirely (see post.liquid).
+{% endcomment %}
+
+{% assign related_list = "" | split: "" %}
+
+{% for ref in page.related_posts %}
+  {% assign matches = site.posts | where_exp: "post", "post.path contains ref" %}
+  {% assign related_list = related_list | concat: matches %}
 {% endfor %}
+
+{% if related_list == empty %}
+  {% assign related_list = site.related_posts %}
+{% endif %}
+
+{% assign max_related = site.related_blog_posts.max_related | default: 5 %}
+
+{% if related_list != empty %}
+  <br>
+  <hr>
+  <br>
+
+  <!-- Adds related posts to the end of an article -->
+  <h2 class="text-3xl font-semibold mb-4 mt-12">Found This Interesting?</h2>
+  <p class="mb-2">Here are some more posts you might like to read next:</p>
+
+  <ul class="list-disc pl-8">
+    {% for post in related_list limit: max_related %}
+      <li class="my-2">
+        <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

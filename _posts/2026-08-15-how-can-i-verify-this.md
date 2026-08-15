@@ -1,8 +1,77 @@
 ---
 layout: post
 date: 2026-08-15
-title: "🧐 How can I verify this?"
+title: "Greatest Common Tiling"
 tags: [math, arithmetic, SoME]
+related_posts:
+  - computing-bezout-coefficients
+_styles: >
+  /* screenshots: a bit narrower than the text column, centered */
+  .post-figure {
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  /* tables: centered as a block, with centered cells */
+  #markdown-content table {
+    width: auto;
+    margin: 1.75rem auto;
+    border-collapse: collapse;
+  }
+  #markdown-content table th,
+  #markdown-content table td {
+    padding: 0.4rem 1.5rem;
+    text-align: center;
+    border: none;
+    font-variant-numeric: tabular-nums;
+  }
+  #markdown-content table thead th {
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+  #markdown-content table tbody tr:not(:last-child) td {
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  /* highlighted boxes for definition / lemma / proof */
+  .callout {
+    background-color: rgba(42, 120, 214, 0.08);
+    border: 1px solid rgba(42, 120, 214, 0.22);
+    border-left: 3px solid #2a78d6;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 1.75rem 0;
+  }
+  .callout-proof {
+    background-color: rgba(42, 120, 214, 0.04);
+  }
+  .callout > :first-child {
+    margin-top: 0;
+  }
+  .callout > :last-child {
+    margin-bottom: 0;
+  }
+  html[data-theme="dark"] .callout {
+    background-color: rgba(57, 135, 229, 0.13);
+    border-color: rgba(57, 135, 229, 0.3);
+    border-left-color: #3987e5;
+  }
+  html[data-theme="dark"] .callout-proof {
+    background-color: rgba(57, 135, 229, 0.07);
+  }
+
+  @media (max-width: 600px) {
+    .post-figure {
+      width: 100%;
+    }
+    #markdown-content table th,
+    #markdown-content table td {
+      padding: 0.35rem 0.7rem;
+    }
+  }
 ---
 
 This is my entry for [SoME4](https://some.3b1b.co).
@@ -13,7 +82,7 @@ Imagine this: I just moved to a new flat, it's a great place overall, but there 
 
 I got the dimensions of the floor using a tape measure and found it to be 126 cm wide and 231 cm long. To make life easy, I'd prefer to tile it with squares that have a whole number side-length, and ideally, no cutting of tiles, because I don't have the proper tools for that. It's clear that squares of $1$ cm side-length would do the job, but that means I'd have to place down $126 \times 231 = 29\,106$ tiny tiles, so... let's first see if there aren't any larger squares that also work. I'll ask one of the numerous chatbots to help me out:
 
-{% include figure.liquid loading="eager" path="assets/img/some4-tiles-question.png" class="img-fluid rounded z-depth-1" alt="A chatbot listing 1, 3, 7, 21, 42 and 63 cm as possible tile sizes for a 126 cm by 231 cm floor, and recommending 42 cm tiles." %}
+{% include figure.liquid loading="eager" path="assets/img/some4-tiles-question.png" class="img-fluid rounded z-depth-1 post-figure" alt="A chatbot listing 1, 3, 7, 21, 42 and 63 cm as possible tile sizes for a 126 cm by 231 cm floor, and recommending 42 cm tiles." %}
 
 In true chatbot fashion the answer is not entirely correct: Using 5.5 tiles along the length clearly _does_ require cutting. What a wonderful moment therefore, to remember the mantra which ought to constantly echo in your mind while conversing with any chatbot:
 
@@ -41,11 +110,13 @@ leading to a total of $6 \times 11 = 66$ tiles, which is much more manageable.
 
 Speaking of making mistakes: After double checking my measurements to make sure that I wouldn't regret ordering wrong tiles, I realized that I actually forgot to account for the length of the body of the tape measure I used... 🤦‍♂
 
-{% include figure.liquid path="assets/img/some4-tiles-coprime.png" class="img-fluid rounded z-depth-1" alt="The chatbot replying that the greatest common divisor of 131 and 236 is 1, so no larger square tile fits both dimensions without cutting." %}
+{% include figure.liquid path="assets/img/some4-tiles-coprime.png" class="img-fluid rounded z-depth-1 post-figure" alt="The chatbot replying that the greatest common divisor of 131 and 236 is 1, so no larger square tile fits both dimensions without cutting." %}
 
 Oh, that's ehh... less than ideal. The above tells us that $a = 131$ and $b = 236$ don't share any divisors bigger than $1$, which means there is no number $d > 1$ which divides both $a$ and $b$. Let's give number pairs like this a name:
 
+<div class="callout" markdown="1">
 **Definition:** Two numbers $a, b$ are called _disjoint_[^disjoint] if there is no divisor $d > 1$ which divides both numbers.
+</div>
 
 [^disjoint]: The conventional name for this is [_"coprime"_](https://en.wikipedia.org/wiki/Coprime_integers).
 
@@ -79,7 +150,7 @@ What I would much rather want to do, is to make the chatbot do the work, and the
 1. In the above table, why did I leave out numbers beyond $d = 131$? Is it not necessary to check them?
 2. Since checking that none of the numbers $2, 3, 4, 5, \dots, 131$ divide both $131$ and $236$ by hand sounds like a lot of work, why not ask the chatbot to create a table with that information for us? Wouldn't that allow us to skip the most tedious part (calculating) and just have a look at the results?
 
-# No more than two
+# Bézout to the rescue
 
 Up to now it seems that in order to verify that $1$ is the only common divisor of $131$ and $236$, we have to do a lot of manual checking. With this in mind, the next thing I'll show you hopefully seems a bit like magic, because knowing about this will save us from doing **all** of that work.
 
@@ -93,7 +164,11 @@ that is, if we multiply $131$ respectively $236$ with them and add the results u
 
 What we will now see right away, is that this allows us to immediately conclude that $a$ and $b$ must be disjoint.
 
+<div class="callout" markdown="1">
 **Lemma:** If there are $x_1, x_2 \in \mathbb{Z}$ such that $a x_1  + b x_2 = 1$, then $1$ is the _only_ common divisor of $a$ and $b$.
+</div>
+
+<div class="callout callout-proof" markdown="1">
 
 _Proof:_ Let $d > 0$ be some number which divides both $a$ and $b$. This means there are numbers $a', b'$ such that:
 
@@ -115,9 +190,11 @@ $$
 
 Since $d > 0$, the only way for this product to equal $1$ is if both of numbers are equal to $1$, so in particular $d = 1$. $\Box$
 
+</div>
+
 This is neat! It tells us that in order to be certain that two numbers are disjoint, it suffices to find (or be given) two special numbers $x_1, x_2$ which satisfy the above equation. Let's put this to the test! We will go ask the chatbot to find numbers like this, which would prove that they are disjoint. And luckily, this time we can easily verify its response.
 
-{% include figure.liquid path="assets/img/some4-bezout-request.png" class="img-fluid rounded z-depth-1" alt="The chatbot solving 131a + 236b = 1 with the extended Euclidean algorithm and answering a = -9, b = 5." %}
+{% include figure.liquid path="assets/img/some4-bezout-request.png" class="img-fluid rounded z-depth-1 post-figure" alt="The chatbot solving 131a + 236b = 1 with the extended Euclidean algorithm and answering a = -9, b = 5." %}
 
 And indeed! We have that the following equation is satisfied:
 
@@ -195,7 +272,3 @@ What have we learned?
 - Always verify the answers a chatbot gives you.
 
 And now you'll have to excuse me; I have just received a delivery of $30\,916$ tiny bathroom tiles, so I have quite some work ahead of me.
-
----
-
-If you want to see another (matrix flavoured) way of computing these coefficients, have a look at my earlier post on [conveniently computing Bézout coefficients]({% post_url 2024-06-11-computing-bezout-coefficients %}).
